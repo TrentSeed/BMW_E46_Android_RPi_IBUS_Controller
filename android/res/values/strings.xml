@@ -4,5 +4,6 @@
     <string name="app_name">IBUS</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="app_description">BMW E46 IBUS Communication</string>
 
 </resources>
