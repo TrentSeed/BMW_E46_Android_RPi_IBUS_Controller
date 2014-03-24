@@ -1,17 +1,25 @@
+BMW E46 - Android RasperryPi IBUS Controller
+=====
 
-==============================================
-Nexus 7 (Android/Java)
-==============================================
+IBUS interface for my E46 BMW written in Python & Java
+This is to be used with the USB interface which can be acquired from [Reslers.de](http://www.reslers.de/IBUS/)
 
-Started
+## Overview
+There are 2 main components:
+**Android** - Front-end user interface for navigation
+**Raspberry Pi** - Interfaces with IBUS via USB and Android via USB
 
-Ended
+### Architecture
+In progress
 
+## Pre-Requisites
+* python, python-setuptools
+	* `apt-get install python python-setuptools`
+* **Python modules:** pyserial
+	* `easy_install pyserial`
 
-==============================================
-Raspberry Pi (Linux/Python)
-==============================================
-
-Started
-
-Ended
+## How to use
+* Install the prerequisites above
+* Plug in IBUS USB device
+* Plug in Android USB device
+* Run: `./start.py`

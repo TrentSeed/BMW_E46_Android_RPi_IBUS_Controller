@@ -22,7 +22,7 @@ class IBUS():
         while True:
             data = self.handle.read(9999)
             if len(data) > 0:
-                self.process_payload(data)
+                self.process_bus_dump(data)
 
         return
 
@@ -37,7 +37,7 @@ class IBUS():
             self.handle = None
 
     @staticmethod
-    def process_payload(payload, index=0):
+    def process_bus_dump(dump, index=0):
         """
         Processes bytes received from serial and parse packets
 
@@ -47,36 +47,36 @@ class IBUS():
                              | ------ Length -------|
 
         """
-        hex_payload = payload.encode('hex')
+        hex_dump = dump.encode('hex')
 
-        while index < len(hex_payload):
+        while index < len(hex_dump):
             # construct packet while reading
             current_packet = ""
 
             # extract source id
-            source_id = hex_payload[index:(index+2)]
+            source_id = hex_dump[index:(index+2)]
             current_packet += source_id
             index += 2
 
             # extract length info
-            length = hex_payload[index:(index+2)]
+            length = hex_dump[index:(index+2)]
             current_packet += length
             total_length_data = int(length, 16) - 4
             total_length_hex_chars = total_length_data * 2
             index += 2
 
             # extract destination id
-            destination_id = hex_payload[index:(index+2)]
+            destination_id = hex_dump[index:(index+2)]
             current_packet += destination_id
             index += 2
 
             # extract inner data
-            data = hex_payload[index:(index+total_length_hex_chars)]
+            data = hex_dump[index:(index+total_length_hex_chars)]
             current_packet += data
             index += total_length_hex_chars
 
             # extract xor checksum
-            xor = hex_payload[index:(index+2)]
+            xor = hex_dump[index:(index+2)]
             current_packet += xor
             index += 2
 
