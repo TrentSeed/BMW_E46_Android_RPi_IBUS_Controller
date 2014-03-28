@@ -42,7 +42,7 @@ class IBUSPacket():
                    + "Source = " + self.get_device_name(self.source_id) + "\n"\
                    + "Destination = " + self.get_device_name(self.destination_id) + "\n"\
                    + "Data = " + self.data.decode("hex") + "\n"
-        except Exception:
+        except TypeError:
             return "Raw = " + self.raw + "\n"\
                    + "Source = " + self.get_device_name(self.source_id) + "\n"\
                    + "Destination = " + self.get_device_name(self.destination_id) + "\n"\

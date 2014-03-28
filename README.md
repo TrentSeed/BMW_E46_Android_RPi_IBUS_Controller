@@ -9,24 +9,23 @@ There are 3 main components of the solution:<br />
 **Raspberry Pi** - Mini-PC that handles communication between the IBUS adapter and the Android device<br />
 **IBUS USB Adapter** - USB adapter that provides USB/UART interface from physical wire in car<br />
 
-### Architecture
 ![Android_RPi_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_ibus_overview.jpg)
 
-## Hardware Pre-Requisites
-### 1. IBUS USB Adapter
-* The IBUS USB adapter must be physically connected to the 12V, GND, & IBUS wires attached to the [now disconnected] OEM Navigation Head Unit harness.
+## Pre-Requisites
+### 1. Car Installation
+* The Raspberry PI must be installed and the IBUS USB adapter must be physically connected to the 12V, GND, & IBUS wires attached to the [now disconnected] OEM Navigation Head Unit harness.
 
-## Software Pre-Requisites
-### 1. Raspberry Pi
+### 2. Raspberry Pi
 * Install Raspbian (or another OS that supports python)
     * One tutorial [can be found here](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
 * Install *python*, *python-setuptools*
 	* `apt-get install python python-setuptools`
-* Install python module: *pyserial*
+* Install python modules: *pyserial*, *pyusb*
 	* `easy_install pyserial`
+	* [build and install pyusb](http://sourceforge.net/apps/trac/pyusb/)
 * Copy `python/` contents to RPi
 
-### 2. Android
+### 3. Android
 * Build Android project `android/`
 * Install `android/bin/BMW_RPi_IBUS_Controller.apk`
 

@@ -33,7 +33,7 @@ class IBUS():
         try:
             self.handle.close()
             self.handle = None
-        except Exception:
+        except TypeError:
             self.handle = None
 
     @staticmethod
