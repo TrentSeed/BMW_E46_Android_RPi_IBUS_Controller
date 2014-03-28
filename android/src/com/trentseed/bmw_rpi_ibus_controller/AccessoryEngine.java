@@ -78,8 +78,7 @@ public class AccessoryEngine {
 		mCallback = callback;
 		mUsbManager = (UsbManager) mContext
 				.getSystemService(Context.USB_SERVICE);
-		mContext.registerReceiver(mDetachedReceiver, new IntentFilter(
-				ACTION_ACCESSORY_DETACHED));
+		mContext.registerReceiver(mDetachedReceiver, new IntentFilter(ACTION_ACCESSORY_DETACHED));
 	}
 
 	public void onNewIntent(Intent intent) {
@@ -110,7 +109,6 @@ public class AccessoryEngine {
 	}
 
 	public void onDestroy() {
-		// closeConnection();
 		mQuit.set(true);
 		mContext.unregisterReceiver(mDetachedReceiver);
 	}

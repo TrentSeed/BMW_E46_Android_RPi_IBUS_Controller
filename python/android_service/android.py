@@ -7,24 +7,33 @@ import usb
 
 class ANDROID():
 
-    # configuration (Nexus 7)
-    accessory_vendor_id = 0x17EF
-    accessory_product_id = 0x480F
+    # configuration (HTC One X)
+    accessory_vendor_id = 0x0BB4  # (Galaxy S4 - 0x04E8)
+    accessory_product_id = 0x0DFA  # (Galaxy S4 - 0x6860)
     description = "BMW IBUS via Raspberry Pi"
+    endpoint_in = None
+    endpoint_out = None
     handle = None
-    manufacturer = "Nexus-RPi"
+    manufacturer = "Raspberry Pi Foundation"
     model_name = "Raspberry Pi"
     serial_number = "1337"
-    url = "http://www.trentseed.com/BMW_E46_IBUS_APP.apk"
+    url = "https://github.com/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller/"
     version = "0.1"
 
     def __init__(self):
         """
         Initializes bi-directional communication with ANDROID via USB
         """
-        while True:
-            # perform accessory communication
-            self.accessory_task()
+        self.handle = usb.core.find(idVendor=self.accessory_vendor_id)
+        if self.handle is None:
+            raise ValueError("Android device is not connected")
+
+        # place device in accessory mode and listen for commands
+        self.set_protocol()
+        self.set_accessory_mode()
+        self.set_endpoints()
+        self.start_accessory_tasks()
+        return
 
     def destroy(self):
         """
@@ -33,87 +42,32 @@ class ANDROID():
         try:
             self.handle.close()
             self.handle = None
-        except TypeError:
+        except ValueError:
             self.handle = None
 
-    def accessory_task(self):
+    def set_protocol(self):
         """
-        Perform Android USB Accessory communication task
+        Communicate with android device, set configuration,
+        and determine supported Open Accessory Protocol version
         """
-        self.handle = usb.core.find(idVendor=self.accessory_vendor_id)
+        try:
+            self.handle.set_configuration()
+        except usb.core.USBError as e:
+            if e.errno == 16:
+                print('Device already configured, should be OK')
+            else:
+                print('Configuration failed')
+        ret = self.handle.ctrl_transfer(0xC0, 51, 0, 0, 2)
+        protocol = ret[0]
+        print('Protocol version: %i' % protocol)
+        if protocol < 2:
+            print('Android Open Accessory protocol v2 not supported')
+        return
 
-        # check if device found
-        if self.handle is None:
-            raise ValueError("No compatible device found")
-
-        # place device in accessory mode
-        self.send_accessory_info()
-
-        # android 'accessory connected' intent
-        self.handle.set_configuration()
-        time.sleep(1)
-        configuration = self.handle.get_active_configuration()
-        interface_num = configuration[(0, 0)].bInterfaceNumber
-        interface = usb.util.find_descriptor(configuration, bInterfaceNumber=interface_num)
-
-        # determine endpoint out
-        ep_out = usb.util.find_descriptor(
-            interface, custom_match=lambda e:
-            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_OUT
-        )
-        print str(type(ep_out))
-
-        # determine endpoint in
-        ep_in = usb.util.find_descriptor(
-            interface, custom_match=lambda e:
-            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN
-        )
-        print str(type(ep_in))
-
-        # start usb writer thread
-        writer_thread = threading.Thread(target=self.writer, args=(ep_out, ))
-        writer_thread.start()
-
-        # perform read until all bytes in
-        self.reader(ep_in)
-
-        # close writer thread
-        writer_thread.join()
-
-    @staticmethod
-    def writer(ep_out):
-        """
-        Send data bytes via USB connection
-        """
-        while True:
-            try:
-                length = ep_out.write([0], timeout=0)
-                print("%d bytes written" % length)
-                time.sleep(0.5)
-            except usb.core.USBError:
-                print("Error in writer thread")
-                break
-            except TypeError:
-                print "Error while writing " + str(type(ep_out))
-                break
-
-    @staticmethod
-    def reader(ep_in):
-        """
-        Read data bytes via USB connection
-        """
-        while True:
-            try:
-                data = ep_in.read(size=1, timeout=0)
-                print("Read value %d" % data[0])
-            except usb.core.USBError:
-                print("Failed to send IN transfer")
-                break
-
-    def send_accessory_info(self):
+    def set_accessory_mode(self):
         """
         Communicate with Android device via USB and describe the
-        Raspberry Pi accessory
+        Raspberry Pi accessory (refer to Open Accessory Protocol)
         """
         # read version info
         version = self.handle.ctrl_transfer(
@@ -157,3 +111,75 @@ class ANDROID():
             53, 0, 0, None)
 
         time.sleep(1)
+
+    def set_endpoints(self):
+        """
+        Get USB configuration and determine IN and OUT endpoints
+        """
+        configuration = self.handle.get_active_configuration()
+        interface_num = configuration[(0, 0)].bInterfaceNumber
+        interface = usb.util.find_descriptor(configuration, bInterfaceNumber=interface_num)
+
+        # determine endpoint out
+        self.endpoint_out = usb.util.find_descriptor(
+            interface, custom_match=lambda e:
+            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_OUT
+        )
+
+        # determine endpoint in
+        self.endpoint_in = usb.util.find_descriptor(
+            interface, custom_match=lambda e:
+            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN
+        )
+
+    def start_accessory_tasks(self):
+        """
+        Performs regular communication with Android USB device
+        """
+        while True:
+            self.perform_accessory_task()
+
+    def perform_accessory_task(self):
+        """
+        Perform Android USB Accessory communication task
+        """
+        print "Performing accessory task..."
+        time.sleep(5)
+        print self.handle.write(self.endpoint_out, '0x01', [0], 0, 18)
+        #print self.endpoint_in.read(size=1, timeout=10)
+        # start usb writer thread
+        #writer_thread = threading.Thread(target=self.writer, args=(ep_out, ))
+        #writer_thread.start()
+
+        # perform read until all bytes in
+        #self.reader(ep_in)
+
+        # close writer thread
+        #writer_thread.join()
+
+    def writer(self):
+        """
+        Send data bytes via USB connection to Android
+        """
+        while True:
+            try:
+                assert len(self.endpoint_out.write('test')) == len('test')
+                time.sleep(0.5)
+            except usb.core.USBError:
+                print "Error in writer thread"
+                break
+            except TypeError:
+                print "Error while writing " + str(type(self.endpoint_out))
+                break
+
+    def reader(self):
+        """
+        Read data bytes via USB connection from Android
+        """
+        while True:
+            try:
+                data = self.endpoint_in.read(size=1, timeout=0)
+                print "Read value %d" % data[0]
+            except usb.core.USBError:
+                print "Failed to send IN transfer"
+                break

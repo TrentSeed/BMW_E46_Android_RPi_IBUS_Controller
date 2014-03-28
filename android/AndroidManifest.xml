@@ -30,10 +30,14 @@
                 android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
                 android:resource="@xml/accessory_filter" />
         </activity>
-        <activity android:name=".ActivityIBUS" android:screenOrientation="landscape"></activity>
-        <activity android:name=".ActivityRadio" android:screenOrientation="landscape"></activity>
-        <activity android:name=".ActivityStatus" android:screenOrientation="landscape"></activity>
-        <activity android:name=".ActivityWindows" android:screenOrientation="landscape"></activity>
+        <activity android:name=".ActivityIBUS" android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Wallpaper"></activity>
+        <activity android:name=".ActivityRadio" android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Wallpaper"></activity>
+        <activity android:name=".ActivityStatus" android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Wallpaper"></activity>
+        <activity android:name=".ActivityWindows" android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Wallpaper"></activity>
     </application>
 
 </manifest>

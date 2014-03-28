@@ -27,7 +27,7 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/TextView02"
+                    android:id="@+id/tvBtnRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -44,7 +44,7 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/tvBtnIBUS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -70,7 +70,7 @@
                 android:padding="20dp" >
 
                 <ImageView
-                    android:id="@+id/ImageView01"
+                    android:id="@+id/ivBMWEmblem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -85,14 +85,14 @@
                 android:layout_weight="2" >
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvBtnLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
                     android:paddingTop="10dp"
-                    android:text="Distel Dr\nLos Altos, CA"
+                    android:text="DISTEL DR\nLOS ALTOS, CA"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="30sp" />
 
@@ -114,7 +114,7 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/TextView03"
+                    android:id="@+id/tvBtnWindows"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -131,7 +131,7 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/TextView01"
+                    android:id="@+id/tvBtnStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
