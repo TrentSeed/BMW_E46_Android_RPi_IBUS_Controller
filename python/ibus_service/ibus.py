@@ -17,6 +17,7 @@ class IBUS():
         """
         Initializes bi-directional communication with IBUS adapter via USB
         """
+        print "Initialize IBUS service..."
         self.handle = serial.Serial(self.port, parity=self.parity, timeout=self.timeout)
 
         while True:
@@ -31,13 +32,13 @@ class IBUS():
         Closes serial connection and resets handle
         """
         try:
+            print "Destroying IBUS service..."
             self.handle.close()
             self.handle = None
         except TypeError:
             self.handle = None
 
-    @staticmethod
-    def process_bus_dump(dump, index=0):
+    def process_bus_dump(self, dump, index=0):
         """
         Processes bytes received from serial and parse packets
 
@@ -88,7 +89,14 @@ class IBUS():
             # create packet
             packet = IBUSPacket(source_id=source_id, length=total_length_data,
                                 destination_id=destination_id, data=data, xor_checksum=xor, raw=current_packet)
-            print packet
 
             # send to android if valid
-            # TODO if packet.is_valid():
+            self.process_packet(packet)
+
+    def process_packet(self, packet):
+        """
+        Process packet and determine message to send to Android
+        """
+        print packet
+        # TODO if packet.is_valid():
+        return

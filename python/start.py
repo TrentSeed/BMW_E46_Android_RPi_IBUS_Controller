@@ -34,8 +34,8 @@ def start_services():
     try:
         ibus = IBUS()
         android = ANDROID()
-    except Exception:
-        print "Failed to start service(s)"
+    except Exception as e:
+        print e.message + "\nFailed to start service(s)"
 
 # start RPi services
 start_services()

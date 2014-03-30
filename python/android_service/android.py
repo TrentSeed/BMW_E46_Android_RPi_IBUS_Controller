@@ -1,185 +1,92 @@
 #!/usr/bin/env python
-import struct
-import time
-import threading
-import usb
+from bluetooth import *
 
 
 class ANDROID():
 
-    # configuration (HTC One X)
-    accessory_vendor_id = 0x0BB4  # (Galaxy S4 - 0x04E8)
-    accessory_product_id = 0x0DFA  # (Galaxy S4 - 0x6860)
-    description = "BMW IBUS via Raspberry Pi"
-    endpoint_in = None
-    endpoint_out = None
+    # configuration
+    bluetooth_address = "10:3B:59:4E:83:77"
+    client_sock = None
+    client_info = None
     handle = None
-    manufacturer = "Raspberry Pi Foundation"
-    model_name = "Raspberry Pi"
-    serial_number = "1337"
-    url = "https://github.com/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller/"
-    version = "0.1"
+    service_uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+    server_sock = None
 
     def __init__(self):
         """
-        Initializes bi-directional communication with ANDROID via USB
+        Initializes bi-directional communication with ANDROID via Bluetooth
         """
-        self.handle = usb.core.find(idVendor=self.accessory_vendor_id)
-        if self.handle is None:
-            raise ValueError("Android device is not connected")
+        print "Initializing BLUETOOTH service...."
+        self.handle = None
 
-        # place device in accessory mode and listen for commands
-        self.set_protocol()
-        self.set_accessory_mode()
-        self.set_endpoints()
-        self.start_accessory_tasks()
+        # prepare bluetooth server
+        self.server_sock = BluetoothSocket(RFCOMM)
+        self.server_sock.bind(("", PORT_ANY))
+        self.server_sock.listen(1)
+        port = self.server_sock.getsockname()[1]
+
+        # start listening for incoming connections
+        advertise_service(self.server_sock, "PythonServer",
+                          service_id=self.service_uuid,
+                          service_classes=[self.service_uuid, SERIAL_PORT_CLASS],
+                          profiles=[SERIAL_PORT_PROFILE])
+        print("Waiting for connection on RFCOMM channel %d" % port)
+
+        # accept received connection
+        self.client_sock, self.client_info = self.server_sock.accept()
+        print("Accepted connection from ", self.client_info)
+
+        # start listening for data
+        #self.start_listening()
         return
 
     def destroy(self):
         """
-        Closes USB connection and resets handle
+        Closes Bluetooth connection and resets handle
         """
         try:
+            print "Destroying BLUETOOTH service..."
             self.handle.close()
+            self.client_sock.close()
+            self.server_sock.close()
             self.handle = None
+            self.client_sock = None
+            self.server_sock = None
         except ValueError:
             self.handle = None
+            self.client_sock = None
+            self.server_sock = None
 
-    def set_protocol(self):
+    def send(self, data):
         """
-        Communicate with android device, set configuration,
-        and determine supported Open Accessory Protocol version
+        Sends data via Bluetooth socket connection
         """
         try:
-            self.handle.set_configuration()
-        except usb.core.USBError as e:
-            if e.errno == 16:
-                print('Device already configured, should be OK')
-            else:
-                print('Configuration failed')
-        ret = self.handle.ctrl_transfer(0xC0, 51, 0, 0, 2)
-        protocol = ret[0]
-        print('Protocol version: %i' % protocol)
-        if protocol < 2:
-            print('Android Open Accessory protocol v2 not supported')
+            print ("Sending message...")
+            self.client_sock.send(data)
+            return True
+        except Exception as e:
+            print e
+            return False
+
+    def start_listening(self):
+        """
+        Start listening for incoming data
+        """
+        try:
+            print("Starting to listen for data...")
+            while True:
+                data = self.client_sock.recv(1024)
+                if len(data) == 0:
+                    break
+                self.process_data_in(data)
+        except IOError:
+            pass
+
+    @staticmethod
+    def process_data_in(data):
+        """
+        Processes received data from Bluetooth socket
+        """
+        print("Received [%s]" % data)
         return
-
-    def set_accessory_mode(self):
-        """
-        Communicate with Android device via USB and describe the
-        Raspberry Pi accessory (refer to Open Accessory Protocol)
-        """
-        # read version info
-        version = self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_IN,
-            51, 0, 0, 2)
-        print("Version is: %d" % struct.unpack('<H', version))
-
-        # provide manufacturer info
-        assert self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            52, 0, 0, self.manufacturer) == len(self.manufacturer)
-
-        # provide model name info
-        assert self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            52, 0, 1, self.model_name) == len(self.model_name)
-
-        # provide description info
-        assert self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            52, 0, 2, self.description) == len(self.description)
-
-        # provide version info
-        assert self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            52, 0, 3, self.version) == len(self.version)
-
-        # provide url info
-        assert self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            52, 0, 4, self.url) == len(self.url)
-
-        # provide serial number info
-        assert self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            52, 0, 5, self.serial_number) == len(self.serial_number)
-
-        # provide end of info
-        self.handle.ctrl_transfer(
-            usb.util.CTRL_TYPE_VENDOR | usb.util.CTRL_OUT,
-            53, 0, 0, None)
-
-        time.sleep(1)
-
-    def set_endpoints(self):
-        """
-        Get USB configuration and determine IN and OUT endpoints
-        """
-        configuration = self.handle.get_active_configuration()
-        interface_num = configuration[(0, 0)].bInterfaceNumber
-        interface = usb.util.find_descriptor(configuration, bInterfaceNumber=interface_num)
-
-        # determine endpoint out
-        self.endpoint_out = usb.util.find_descriptor(
-            interface, custom_match=lambda e:
-            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_OUT
-        )
-
-        # determine endpoint in
-        self.endpoint_in = usb.util.find_descriptor(
-            interface, custom_match=lambda e:
-            usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN
-        )
-
-    def start_accessory_tasks(self):
-        """
-        Performs regular communication with Android USB device
-        """
-        while True:
-            self.perform_accessory_task()
-
-    def perform_accessory_task(self):
-        """
-        Perform Android USB Accessory communication task
-        """
-        print "Performing accessory task..."
-        time.sleep(5)
-        print self.handle.write(self.endpoint_out, '0x01', [0], 0, 18)
-        #print self.endpoint_in.read(size=1, timeout=10)
-        # start usb writer thread
-        #writer_thread = threading.Thread(target=self.writer, args=(ep_out, ))
-        #writer_thread.start()
-
-        # perform read until all bytes in
-        #self.reader(ep_in)
-
-        # close writer thread
-        #writer_thread.join()
-
-    def writer(self):
-        """
-        Send data bytes via USB connection to Android
-        """
-        while True:
-            try:
-                assert len(self.endpoint_out.write('test')) == len('test')
-                time.sleep(0.5)
-            except usb.core.USBError:
-                print "Error in writer thread"
-                break
-            except TypeError:
-                print "Error while writing " + str(type(self.endpoint_out))
-                break
-
-    def reader(self):
-        """
-        Read data bytes via USB connection from Android
-        """
-        while True:
-            try:
-                data = self.endpoint_in.read(size=1, timeout=0)
-                print "Read value %d" % data[0]
-            except usb.core.USBError:
-                print "Failed to send IN transfer"
-                break
