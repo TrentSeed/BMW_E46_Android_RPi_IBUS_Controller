@@ -9,7 +9,7 @@ There are 3 main components of the solution:<br />
 **Raspberry Pi** - Mini-PC that handles communication between the IBUS adapter and the Android device<br />
 **IBUS USB Adapter** - USB adapter that provides USB/UART interface from physical wire in car<br />
 
-![Android_RPi_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_ibus_overview.jpg)
+![Android_RPi_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_ibus_overview_v2.jpg)
 
 ## Pre-Requisites
 ### 1. Car Installation

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 from bluetooth import *
+import globals
 
 
-class ANDROID():
+class ANDROID_SERVICE():
 
     # configuration
     bluetooth_address = "10:3B:59:4E:83:77"
     client_sock = None
     client_info = None
-    handle = None
     service_uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
     server_sock = None
 
@@ -16,9 +16,6 @@ class ANDROID():
         """
         Initializes bi-directional communication with ANDROID via Bluetooth
         """
-        print "Initializing BLUETOOTH service...."
-        self.handle = None
-
         # prepare bluetooth server
         self.server_sock = BluetoothSocket(RFCOMM)
         self.server_sock.bind(("", PORT_ANY))
@@ -30,7 +27,7 @@ class ANDROID():
                           service_id=self.service_uuid,
                           service_classes=[self.service_uuid, SERIAL_PORT_CLASS],
                           profiles=[SERIAL_PORT_PROFILE])
-        print("Waiting for connection on RFCOMM channel %d" % port)
+        print("Waiting for connection on RFCOMM channel %d\n" % port)
 
         # accept received connection
         self.client_sock, self.client_info = self.server_sock.accept()
@@ -46,14 +43,11 @@ class ANDROID():
         """
         try:
             print "Destroying BLUETOOTH service..."
-            self.handle.close()
             self.client_sock.close()
             self.server_sock.close()
-            self.handle = None
             self.client_sock = None
             self.server_sock = None
         except ValueError:
-            self.handle = None
             self.client_sock = None
             self.server_sock = None
 
