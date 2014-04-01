@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import globals
-from ibus_service.ibus import IBUS_SERVICE
-from android_service.android import ANDROID_SERVICE
+from ibus_service.ibus import IBUSService
+from android_service.android_bluetooth import AndroidBluetoothService
 import signal
 import sys
 import time
@@ -30,12 +30,13 @@ def start_services():
     # initialize ibus and android services
     try:
         print "Initializing IBUS service...."
-        globals.ibus_service = IBUS_SERVICE()
+        #globals.ibus_service = IBUSService()
         print "Initializing BLUETOOTH service...."
-        globals.android_service = ANDROID_SERVICE()
-        print "\n\nAll services running...\n"
+        globals.android_service = AndroidBluetoothService()
+        print "\nAll services running...\n"
     except Exception as e:
-        print e.message + "\n\nFailed to start service(s)"
+        print e.message + "\nFailed to start service(s)"
+        sys.exit(0)
 
     # until "Ctrl-C" is pressed
     while True:

@@ -32,5 +32,5 @@ There are 3 main components of the solution:<br />
 ## How To Get Started
 * Install the prerequisites above
 * Plug IBUS USB device into Raspberry Pi
-* Plug Android USB device into Raspberry Pi
+* Pair Android device with Raspberry Pi via Bluetooth
 * Run: `python/start.py`

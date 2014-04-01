@@ -5,7 +5,7 @@ from packet import IBUSPacket
 import threading
 
 
-class IBUS_SERVICE():
+class IBUSService():
 
     # configuration
     baudrate = 9600
@@ -94,24 +94,36 @@ class IBUS_SERVICE():
                 return False
 
             # create packet
-            packet = IBUSPacket(source_id=source_id, length=total_length_data,
-                                destination_id=destination_id, data=data, xor_checksum=xor, raw=current_packet)
+            packet = IBUSPacket(source_id=source_id, length=total_length_data, destination_id=destination_id,
+                                data=data, xor_checksum=xor, raw=current_packet)
 
-            # send to android if valid
+            # process packet data (and send to Android)
             self.process_packet(packet)
 
-    def process_packet(self, packet):
+    @staticmethod
+    def process_packet(packet):
         """
         Process packet and determine message to send to Android
         """
-        print packet
-        # TODO if packet.is_valid():
+        if not packet.is_valid():
+            return False
 
-        # check if steering wheel command
-        if packet.source_id == "50" and packet.destination_id == "68":
-            try:
-                globals.android_service.send("next")
-            except Exception as e:
-                print e + "\n" + "Failed to send to android"
+        try:
+            # print packet to console
+            print packet
 
-        return
+            # check if 'Next Track' steering wheel command
+            if packet.source_id == "50" and packet.destination_id == "68":
+                globals.android_service.send_packet(packet)
+
+            # TODO check if 'Mode' pressed from steering wheel
+
+            # TODO check if 'GPS Location' text update received
+
+            # send packet to android
+            globals.android_service.send_packet(packet)
+
+        except Exception as e:
+            print e.message + "\n" + "Failed to send to android"
+
+        return True

@@ -2,6 +2,7 @@
 
 class IBUSPacket():
 
+    # instance variables
     source_id = None
     length = None
     destination_id = None
@@ -9,7 +10,7 @@ class IBUSPacket():
     xor_checksum = None
     raw = None
 
-    def __init__(self, source_id, length, destination_id, data, xor_checksum, raw = None):
+    def __init__(self, source_id, length, destination_id, data, xor_checksum, raw=None):
         """
         Initializes packet object
         """
@@ -20,6 +21,18 @@ class IBUSPacket():
         self.xor_checksum = xor_checksum
         self.raw = raw
         return
+
+    def __json__(self):
+        """
+        Returns dict() representation of object
+        """
+        return dict(
+            source_id=self.source_id,
+            length=self.length,
+            destination_id=self.destination_id,
+            data=self.data,
+            xor_checksum=self.xor_checksum,
+            raw=self.raw)
 
     def is_valid(self):
         """
@@ -38,12 +51,12 @@ class IBUSPacket():
         Human-readable string representing packet data
         """
         try:
-            return "Raw = " + self.raw + "\n"\
+            return "IBUSPacket\nRaw = " + self.raw + "\n"\
                    + "Source = " + self.get_device_name(self.source_id) + "\n"\
                    + "Destination = " + self.get_device_name(self.destination_id) + "\n"\
                    + "Data = " + self.data.decode("hex") + "\n"
         except TypeError:
-            return "Raw = " + self.raw + "\n"\
+            return "IBUSPacket\nRaw = " + self.raw + "\n"\
                    + "Source = " + self.get_device_name(self.source_id) + "\n"\
                    + "Destination = " + self.get_device_name(self.destination_id) + "\n"\
                    + "Data = " + self.data + "\n"
