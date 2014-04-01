@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -43,7 +42,7 @@ public class ActivityMain extends Activity {
 	InputStream mBluetoothInputStream;
 	OutputStream mBluetoothOutputStream;
 	UUID serviceUUID = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
-	String remoteAddress = "5C:AC:4C:C8:E2:7E";
+	String remoteBluetoothAddress = "5C:AC:4C:C8:E2:7E";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,12 +125,12 @@ public class ActivityMain extends Activity {
 		
 		try{
 			// connect to device and get input stream
-			mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(remoteAddress);
+			mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(remoteBluetoothAddress);
 			mBluetoothSocket = mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(serviceUUID);
 			mBluetoothSocket.connect();
 			mBluetoothInputStream = mBluetoothSocket.getInputStream();
 			mBluetoothOutputStream = mBluetoothSocket.getOutputStream();
-			Toast.makeText(ActivityMain.this, "Socket connection aquired...", Toast.LENGTH_LONG).show();
+			Toast.makeText(ActivityMain.this, "Socket connection acquired...", Toast.LENGTH_LONG).show();
 			
 			// start listening for data on new thread
 			new ConnectedThread().start();
@@ -165,13 +164,14 @@ public class ActivityMain extends Activity {
 	            try {
 	                bytes = mBluetoothInputStream.read(buffer);
 	                if(bytes > 0){
-	                	Log.d("BMW", "Data in " + String.valueOf(bytes));
-	                	
+	                	Log.d("BMW", "Data in = " + new String(buffer));
+	                	final String strBuffer = new String(buffer);
 	                	//perform command
 	                	ActivityMain.this.runOnUiThread(new Runnable() {
 	                	    @Override
 	                	    public void run() {
-	                	        IBUSWrapper.nextTrack(ActivityMain.this);
+	                	    	Toast.makeText(getApplicationContext(), "Data in = " + new String(strBuffer), Toast.LENGTH_SHORT).show();
+	                	        //IBUSWrapper.nextTrack(ActivityMain.this);
 	                	    }
 	                	});
 	                }

@@ -1,2 +1,3 @@
 Android/bin/
 Android/gen/
+*.pyc

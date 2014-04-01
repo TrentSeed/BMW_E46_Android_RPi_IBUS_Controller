@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import globals
 from ibus_service.ibus import IBUSService
-from android_service.android_bluetooth import AndroidBluetoothService
+from android_service.bt import AndroidBluetoothService
 import signal
 import sys
 import time
@@ -30,7 +30,7 @@ def start_services():
     # initialize ibus and android services
     try:
         print "Initializing IBUS service...."
-        #globals.ibus_service = IBUSService()
+        globals.ibus_service = IBUSService()
         print "Initializing BLUETOOTH service...."
         globals.android_service = AndroidBluetoothService()
         print "\nAll services running...\n"

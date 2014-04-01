@@ -22,7 +22,7 @@ class IBUSPacket():
         self.raw = raw
         return
 
-    def __json__(self):
+    def as_dict(self):
         """
         Returns dict() representation of object
         """

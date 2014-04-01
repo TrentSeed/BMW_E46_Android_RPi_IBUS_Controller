@@ -21,7 +21,7 @@ class BlueBUSPacket():
         self.data = data
         return
 
-    def __json__(self):
+    def as_dict(self):
         """
         Returns dict() representation of object
         """

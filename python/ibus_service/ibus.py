@@ -114,14 +114,14 @@ class IBUSService():
 
             # check if 'Next Track' steering wheel command
             if packet.source_id == "50" and packet.destination_id == "68":
-                globals.android_service.send_packet(packet)
+                globals.android_service.send_command_to_android("NEXT")
 
             # TODO check if 'Mode' pressed from steering wheel
 
             # TODO check if 'GPS Location' text update received
 
             # send packet to android
-            globals.android_service.send_packet(packet)
+            globals.android_service.send_packet_to_android(packet)
 
         except Exception as e:
             print e.message + "\n" + "Failed to send to android"
