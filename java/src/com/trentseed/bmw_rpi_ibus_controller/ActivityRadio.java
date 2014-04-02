@@ -19,6 +19,7 @@ public class ActivityRadio extends Activity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		onNewIntent(getIntent());
 		setContentView(R.layout.activity_radio);
+		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
 		ivBack = (ImageView) findViewById(R.id.ivBack);

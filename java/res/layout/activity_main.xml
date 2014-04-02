@@ -114,12 +114,12 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/tvBtnWindows"
+                    android:id="@+id/tvBtnStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Windows"
+                    android:text="Status"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="45sp" />
 
@@ -131,16 +131,18 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/tvBtnStatus"
+                    android:id="@+id/tvBtnWindows"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Status"
+                    android:layout_weight="1"
+                    android:text="Windows"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="45sp" />
 
             </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

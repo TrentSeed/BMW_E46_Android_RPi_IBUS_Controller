@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ActivityMain" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="107.7"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="100dp" />
+
     <LinearLayout
         android:id="@+id/llVerticallWrapper"
         android:layout_width="match_parent"
@@ -42,6 +52,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
+
         </RelativeLayout>
 
     </LinearLayout>

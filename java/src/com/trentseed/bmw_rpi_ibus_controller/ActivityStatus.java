@@ -19,6 +19,7 @@ public class ActivityStatus extends Activity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		onNewIntent(getIntent());
 		setContentView(R.layout.activity_status);
+		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
 		ivBack = (ImageView) findViewById(R.id.ivBack);

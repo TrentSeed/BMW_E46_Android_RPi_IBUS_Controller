@@ -12,7 +12,7 @@ class IBUSService():
     handle = None
     parity = serial.PARITY_EVEN
     port = 6
-    timeout = 3
+    timeout = 1
     thread = None
 
     def __init__(self):
@@ -42,8 +42,10 @@ class IBUSService():
             print "Destroying IBUS service..."
             self.handle.close()
             self.handle = None
+            self.thread = None
         except TypeError:
             self.handle = None
+            self.thread = None
 
     def process_bus_dump(self, dump, index=0):
         """

@@ -14,7 +14,7 @@ class BlueBUSPacket():
         """
         Initializes packet object
         ---------------------------------------
-        | { "type": "0x01"; "data": "{...}"; } |
+        | { "type": "1"; "data": "{...}"; } |
         ---------------------------------------
         """
         self.type = packet_type
@@ -25,9 +25,8 @@ class BlueBUSPacket():
         """
         Returns dict() representation of object
         """
-        return dict(
-            type=self.type,
-            data=self.data)
+        return dict(type=self.type,
+                    data=self.data)
 
     def is_valid(self):
         """

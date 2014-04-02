@@ -1,25 +1,16 @@
 package com.trentseed.bmw_rpi_ibus_controller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Locale;
-import java.util.UUID;
-
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.util.Log;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Activity that handles presents core functionality to user.
@@ -35,15 +26,6 @@ public class ActivityMain extends Activity {
 	private TextView tvBtnStatus;
 	private TextView tvBtnLocation;
 	
-	// bluetooth objects
-	BluetoothAdapter mBluetoothAdapter;
-	BluetoothDevice mBluetoothDevice;
-	BluetoothSocket mBluetoothSocket;
-	InputStream mBluetoothInputStream;
-	OutputStream mBluetoothOutputStream;
-	UUID serviceUUID = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
-	String remoteBluetoothAddress = "5C:AC:4C:C8:E2:7E";
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,9 +33,13 @@ public class ActivityMain extends Activity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		onNewIntent(getIntent());
 		setContentView(R.layout.activity_main);
+		BluetoothInterface.mActivity = this;
 		
-		// get bluetooth objects
-		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		// initialize bluetooth
+		if(BluetoothInterface.mBluetoothAdapter == null){
+			BluetoothInterface.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+			BluetoothInterface.ConnectToRaspberryPi();
+		}
 		
 		// get layout objects
 		ivBmwEmblem = (ImageView) findViewById(R.id.ivBMWEmblem);
@@ -110,77 +96,26 @@ public class ActivityMain extends Activity {
 		});
 	
 		// check if bluetooth enabled (prompt to enable)
-		if (!mBluetoothAdapter.isEnabled()) {
+		if (!BluetoothInterface.mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    startActivityForResult(enableBtIntent, 100);
 		}
-		
-		// show paired devices
-		/*Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-		if (pairedDevices.size() > 0) {
-		    for (BluetoothDevice device : pairedDevices) {
-		        Toast.makeText(ActivityMain.this, device.getName() + "\n" + device.getAddress(), Toast.LENGTH_SHORT).show();
-		    }
-		}*/
-		
-		try{
-			// connect to device and get input stream
-			mBluetoothDevice = mBluetoothAdapter.getRemoteDevice(remoteBluetoothAddress);
-			mBluetoothSocket = mBluetoothDevice.createInsecureRfcommSocketToServiceRecord(serviceUUID);
-			mBluetoothSocket.connect();
-			mBluetoothInputStream = mBluetoothSocket.getInputStream();
-			mBluetoothOutputStream = mBluetoothSocket.getOutputStream();
-			Toast.makeText(ActivityMain.this, "Socket connection acquired...", Toast.LENGTH_LONG).show();
-			
-			// start listening for data on new thread
-			new ConnectedThread().start();
-		}catch(Exception e){
-			Toast.makeText(ActivityMain.this, "IBUS Bluetooth Server is not running...", Toast.LENGTH_LONG).show();
-		}
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		BluetoothInterface.mActivity = this;
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		try {
-			mBluetoothSocket.close();
-		} catch (IOException e) {
+			BluetoothInterface.Disconnect();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Thread that handles Bluetooth RFCOMM reading
-	 */
-	private class ConnectedThread extends Thread {
-	 
-	    public ConnectedThread() { }
-	 
-	    public void run() {
-	        byte[] buffer = new byte[1024];
-	        int bytes = 0;
-	        
-	        while (true) {
-	            try {
-	                bytes = mBluetoothInputStream.read(buffer);
-	                if(bytes > 0){
-	                	Log.d("BMW", "Data in = " + new String(buffer));
-	                	final String strBuffer = new String(buffer);
-	                	//perform command
-	                	ActivityMain.this.runOnUiThread(new Runnable() {
-	                	    @Override
-	                	    public void run() {
-	                	    	Toast.makeText(getApplicationContext(), "Data in = " + new String(strBuffer), Toast.LENGTH_SHORT).show();
-	                	        //IBUSWrapper.nextTrack(ActivityMain.this);
-	                	    }
-	                	});
-	                }
-	            } catch (IOException e) {
-	            	Log.d("BMW", "Error reading: " + String.valueOf(e.getLocalizedMessage()));
-	                break;
-	            }
-	        }
-	    }
 	}
 	
 }

@@ -5,6 +5,7 @@ from packet import BlueBUSPacket
 from ibus_service.packet import IBUSPacket
 import json
 import time
+import threading
 
 
 class AndroidBluetoothService():
@@ -16,10 +17,20 @@ class AndroidBluetoothService():
     rfcomm_channel = None
     service_uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
     server_sock = None
+    thread = None
 
     def __init__(self):
         """
         Initializes bi-directional communication with ANDROID via Bluetooth
+        """
+        self.thread = threading.Thread(target=self.start)
+        self.thread.daemon = True
+        self.thread.start()
+        return
+
+    def start(self):
+        """
+        Starts bluetooth service
         """
         # prepare bluetooth server
         self.server_sock = BluetoothSocket(RFCOMM)
@@ -32,7 +43,7 @@ class AndroidBluetoothService():
                           service_id=self.service_uuid,
                           service_classes=[self.service_uuid, SERIAL_PORT_CLASS],
                           profiles=[SERIAL_PORT_PROFILE])
-        print("Waiting for connection on RFCOMM channel %d\n" % self.rfcomm_channel)
+        print("Waiting for connection on RFCOMM channel %d" % self.rfcomm_channel)
 
         # accept received connection
         self.client_sock, self.client_info = self.server_sock.accept()
@@ -55,9 +66,11 @@ class AndroidBluetoothService():
             self.server_sock.close()
             self.client_sock = None
             self.server_sock = None
+            self.thread = None
         except ValueError:
             self.client_sock = None
             self.server_sock = None
+            self.thread = None
 
     def send_packet_to_android(self, ibus_packet):
         """
@@ -67,7 +80,7 @@ class AndroidBluetoothService():
             print ("Sending message...")
             # encapsulate IBUS packet in BlueBUSPacket
             packet = BlueBUSPacket(packet_type=BlueBUSPacket.TYPE_PACKET,
-                                   data=ibus_packet.as_dict())
+                                   data=json.dumps(ibus_packet.as_dict()))
 
             # serialize BlueBusPacket and send
             json_data = json.dumps(packet.as_dict())
@@ -121,8 +134,8 @@ class AndroidBluetoothService():
         test_length = 10
         while True:
             # create test packet
-            test_packet = IBUSPacket(source_id="D0", length=str(test_length), destination_id="68",
-                                     data="32", xor_checksum="FF", raw="D0"+str(test_length)+"6832FF")
+            test_packet = IBUSPacket(source_id="f0", length=str(test_length), destination_id="68",
+                                     data="32", xor_checksum="ff", raw="f0"+str(test_length)+"6832ff00")
             self.send_packet_to_android(test_packet)
             test_length += 1
             time.sleep(10)

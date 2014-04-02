@@ -1,3 +1,4 @@
+import time
 
 
 class IBUSPacket():
@@ -9,6 +10,7 @@ class IBUSPacket():
     data = None
     xor_checksum = None
     raw = None
+    timestamp = None
 
     def __init__(self, source_id, length, destination_id, data, xor_checksum, raw=None):
         """
@@ -20,19 +22,20 @@ class IBUSPacket():
         self.data = data
         self.xor_checksum = xor_checksum
         self.raw = raw
+        self.timestamp = str(int(round(time.time() * 1000)))
         return
 
     def as_dict(self):
         """
         Returns dict() representation of object
         """
-        return dict(
-            source_id=self.source_id,
-            length=self.length,
-            destination_id=self.destination_id,
-            data=self.data,
-            xor_checksum=self.xor_checksum,
-            raw=self.raw)
+        return dict(source_id=self.source_id,
+                    length=self.length,
+                    destination_id=self.destination_id,
+                    data=self.data,
+                    xor_checksum=self.xor_checksum,
+                    raw=self.raw,
+                    timestamp=self.timestamp)
 
     def is_valid(self):
         """

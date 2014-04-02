@@ -23,7 +23,7 @@ def start_services():
     """
     Main method of the Rasperry Pi service(s)
     """
-    print "RasperryPi IBUS/Android Communication\n"
+    print "BMW IBUS/RasperryPi/Android Controller"
     print "Starting services..."
     signal.signal(signal.SIGINT, signal_handler_quit)
 
@@ -33,10 +33,12 @@ def start_services():
         globals.ibus_service = IBUSService()
         print "Initializing BLUETOOTH service...."
         globals.android_service = AndroidBluetoothService()
-        print "\nAll services running...\n"
+        print "All services running..."
     except Exception as e:
-        print e.message + "\nFailed to start service(s)"
-        sys.exit(0)
+        print e.message + "Failed to start, trying again in 5 seconds..."
+        time.sleep(5)
+        start_services()
+        return
 
     # until "Ctrl-C" is pressed
     while True:
