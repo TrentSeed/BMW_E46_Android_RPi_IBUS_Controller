@@ -15,11 +15,14 @@ class IBUSService():
     timeout = 1
     thread = None
 
+    # commands
+    radio_switch_mode = 'f004684823f7'.decode('hex')
+
     def __init__(self):
         """
         Initializes bi-directional communication with IBUS adapter via USB
         """
-        self.handle = serial.Serial(self.port, parity=self.parity, timeout=self.timeout)
+        self.handle = serial.Serial(self.port, parity=self.parity, timeout=self.timeout, stopbits=1)
         self.thread = threading.Thread(target=self.start)
         self.thread.daemon = True
         self.thread.start()
@@ -30,7 +33,7 @@ class IBUSService():
         Starts listen service
         """
         while True:
-            data = self.handle.read(2048)
+            data = self.handle.read(9999)
             if len(data) > 0:
                 self.process_bus_dump(data)
 
@@ -58,7 +61,7 @@ class IBUSService():
 
         """
         hex_dump = dump.encode('hex')
-
+        print hex_dump
         while index < len(hex_dump):
             # construct packet while reading
             current_packet = ""
@@ -69,7 +72,7 @@ class IBUSService():
             index += 2
 
             # extract length info
-            length = hex_dump[index:(index+2)]
+            length = hex_dump[index:(index+2)].encode('hex')
             current_packet += length
             total_length_data = int(length, 16) - 4
             total_length_hex_chars = total_length_data * 2
@@ -129,3 +132,10 @@ class IBUSService():
             print e.message + "\n" + "Failed to send to android"
 
         return True
+
+    def radio_toggle_mode(self):
+        """
+        Toggles 'Aux / Radio / CD-Player'
+        """
+        print "Writing to IBUS " + 'f004684823f7'.decode('hex')
+        self.handle.write('f004684823f7'.decode('hex'))

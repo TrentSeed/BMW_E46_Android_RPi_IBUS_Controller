@@ -1,6 +1,7 @@
 package com.trentseed.bmw_rpi_ibus_controller;
 
 import java.io.IOException;
+
 import android.util.Log;
 import com.google.gson.Gson;
 
@@ -12,11 +13,11 @@ class ConnectedThread extends Thread {
     public ConnectedThread() { }
  
     public void run() {
-        byte[] buffer = new byte[1024];
         int bytes = 0;
         
         while (true) {
             try {
+            	byte[] buffer = new byte[1024];
                 bytes = BluetoothInterface.mBluetoothInputStream.read(buffer);
                 if(bytes > 0){
                 	// read data, inflate to BlueBusPacket, extract IBUSPacket

@@ -35,7 +35,7 @@ public class BluetoothInterface {
 	/**
 	 * Connects to RaspberryPi via bluetooth
 	 */
-	public static boolean ConnectToRaspberryPi(){
+	public static boolean connectToRaspberryPi(){
 		try{
 			// connect to device and get input stream
 			mArrayListIBUSActivity = new ArrayList<IBUSPacket>();
@@ -55,9 +55,21 @@ public class BluetoothInterface {
 	}
 	
 	/**
+	 * Determines if Bluetooth connection has been established with Raspberry Pi
+	 * @return
+	 */
+	public static boolean isConnected(){
+		if(mBluetoothAdapter!=null && mBluetoothDevice!=null && mBluetoothSocket.isConnected()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
 	 * Disconnect bluetooth RFCOMM connection
 	 */
-	public static void Disconnect(){
+	public static void disconnect(){
 		try{
 			mBluetoothSocket.close();
 		}catch(Exception e){
@@ -73,7 +85,7 @@ public class BluetoothInterface {
 	 * Displays each paired bluetooth device info via Toast notification
 	 * @param activity
 	 */
-	public static void ViewPairedDevices(Activity activity){
+	public static void viewPairedDevices(Activity activity){
 		// show paired devices
 		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 		if (pairedDevices.size() > 0) {

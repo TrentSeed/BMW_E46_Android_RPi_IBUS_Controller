@@ -38,7 +38,7 @@ public class ActivityMain extends Activity {
 		// initialize bluetooth
 		if(BluetoothInterface.mBluetoothAdapter == null){
 			BluetoothInterface.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-			BluetoothInterface.ConnectToRaspberryPi();
+			BluetoothInterface.connectToRaspberryPi();
 		}
 		
 		// get layout objects
@@ -54,7 +54,7 @@ public class ActivityMain extends Activity {
 			@Override
 			public void onClick(View v) {
 				// go to next music track
-				IBUSWrapper.nextTrack(ActivityMain.this);
+				IBUSWrapper.toggleMode(ActivityMain.this);
 			}
 		});
 		tvBtnLocation.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +112,7 @@ public class ActivityMain extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		try {
-			BluetoothInterface.Disconnect();
+			BluetoothInterface.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

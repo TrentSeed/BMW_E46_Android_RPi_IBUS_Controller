@@ -41,4 +41,13 @@ public class ActivityIBUS extends Activity {
 		lvBusEvents.setAdapter(adapter);
 	}
 	
+	/**
+	 * Received an IBUSPacket, store in cache and update ListView
+	 */
+	public void receivedIBUSPacket(IBUSPacket ibPacket){
+		// add packet to local buffer (IBUS activity displays buffer)
+		BluetoothInterface.mArrayListIBUSActivity.add(0, ibPacket);
+		adapter.notifyDataSetChanged();
+	}
+	
 }

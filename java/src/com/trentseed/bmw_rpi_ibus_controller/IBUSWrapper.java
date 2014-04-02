@@ -1,7 +1,12 @@
 package com.trentseed.bmw_rpi_ibus_controller;
 
+import java.io.IOException;
+
+import com.google.gson.Gson;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 
 /**
@@ -50,13 +55,10 @@ public class IBUSWrapper {
 	 * @param command
 	 */
 	public static void processPacket(IBUSPacket ibPacket){
-		// add packet to local buffer (IBUS activity displays buffer)
-		BluetoothInterface.mArrayListIBUSActivity.add(0, ibPacket);
-		
 		// perform activity specific actions
 		if(BluetoothInterface.mActivity instanceof ActivityIBUS){
-			((ActivityIBUS) BluetoothInterface.mActivity).adapter.notifyDataSetChanged();
-			// TODO check if GPS update packet
+			((ActivityIBUS) BluetoothInterface.mActivity).receivedIBUSPacket(ibPacket);
+			
 		}else if(BluetoothInterface.mActivity instanceof ActivityRadio){
 			
 		}else if(BluetoothInterface.mActivity instanceof ActivityStatus){
@@ -81,4 +83,21 @@ public class IBUSWrapper {
 		 }
 	}
 	
+	/**
+	 * Toggles the 'Mode' (i.e. Radio, AUX, CD-Player, iPod, etc.)
+	 * @param thisActivity
+	 */
+	public static void toggleMode(Activity thisActivity){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "TOGGLE_MODE";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

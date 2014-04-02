@@ -50,10 +50,10 @@ class AndroidBluetoothService():
         print("Accepted connection from ", self.client_info)
 
         # debug only - send test packets over Bluetooth
-        self.start_debug_sending()
+        #self.start_debug_sending()
 
         # start listening for data
-        #self.start_listening()
+        self.start_listening()
         return
 
     def destroy(self):
@@ -149,5 +149,14 @@ class AndroidBluetoothService():
         parsed_json = json.loads(data)
         packet = BlueBUSPacket(packet_type=parsed_json['type'],
                                data=parsed_json['data'])
-        print("Received [%s]" % packet)
+        print("Received BlueBusPacket from Android [" + str(len(packet.data)) + "]")
+
+        # TEMPORARY - toggle radio mode from this event
+        """
+        try:
+            globals.ibus_service.radio_toggle_mode()
+            print "Action - Toggling radio mode"
+        except Exception:
+            print "Action Failed - Unable to toggle radio mode"
+        """
         return

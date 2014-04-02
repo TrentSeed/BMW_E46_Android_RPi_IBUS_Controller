@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/bmw_emblem" />
+                    android:src="@drawable/bmw_emblem_selector" />
 
             </RelativeLayout>
 
