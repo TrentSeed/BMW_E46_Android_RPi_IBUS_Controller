@@ -5,6 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ActivityMain" >
 
+    <TextView
+        android:id="@+id/tvNoActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="There is no activity on IBUS"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp" />
+
     <LinearLayout
         android:id="@+id/llVerticallWrapper"
         android:layout_width="match_parent"
@@ -36,6 +46,19 @@
                 android:text="IBUS"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="50sp" />
+
+            <ImageView
+                android:id="@+id/ivBusActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="false"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:src="@drawable/bus_activity" />
 
         </RelativeLayout>
 

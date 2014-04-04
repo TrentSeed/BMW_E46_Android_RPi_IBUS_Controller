@@ -35,8 +35,9 @@ def start_services():
         globals.android_service = AndroidBluetoothService()
         print "All services running..."
     except Exception as e:
-        print e.message + "Failed to start, trying again in 5 seconds..."
+        print "Error: " + e.message + "\n" + "Failed to start, trying again in 5 seconds..."
         time.sleep(5)
+        print "Restarting now...\n"
         start_services()
         return
 

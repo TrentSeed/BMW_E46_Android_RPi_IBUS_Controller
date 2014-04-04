@@ -6,7 +6,7 @@
     tools:context=".ActivityMain" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvNoActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

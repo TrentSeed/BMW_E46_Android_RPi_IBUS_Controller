@@ -29,7 +29,7 @@ public class BluetoothInterface {
 	public static InputStream mBluetoothInputStream;
 	public static OutputStream mBluetoothOutputStream;
 	public static UUID serviceUUID = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
-	public static String remoteBluetoothAddress = "5C:AC:4C:C8:E2:7E";
+	public static String remoteBluetoothAddress = "00:11:67:D6:A7:5D"; //"5C:AC:4C:C8:E2:7E";
 	public static ConnectedThread listenThread;
 	
 	/**

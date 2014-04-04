@@ -25,7 +25,6 @@ public class AdapterIBUS extends BaseAdapter{
 	//instance variables
 	public ActivityIBUS thisActivity;
 	
-	/** Constructor for user info field adapter. */
 	public AdapterIBUS(ActivityIBUS thisActivity){
 		//store context and determine enroll status
 		this.thisActivity = thisActivity;
@@ -41,6 +40,17 @@ public class AdapterIBUS extends BaseAdapter{
 
 	public long getItemId(int position) {
 		return BluetoothInterface.mArrayListIBUSActivity.get(position).hashCode();
+	}
+	
+	@Override
+	public void notifyDataSetChanged(){
+		super.notifyDataSetChanged();
+		
+		if(this.getCount() == 0){
+			thisActivity.tvNoActivity.setVisibility(View.VISIBLE);
+		}else{
+			thisActivity.tvNoActivity.setVisibility(View.GONE);			
+		}
 	}
 
 	public View getView(final int position, View convertView, ViewGroup parent) {

@@ -20,9 +20,10 @@ There are 3 main components of the solution:<br />
     * One tutorial [can be found here](http://computers.tutsplus.com/articles/how-to-flash-an-sd-card-for-raspberry-pi--mac-53600)
 * Install *python*, *python-setuptools*
 	* `apt-get install python python-setuptools`
-* Install python modules: *pyserial*, *pybluz*
+* Install python modules: *pyserial*, *libbluetooth-dev*, *pybluz*
 	* `easy_install pyserial`
-	* [install pybluz](https://code.google.com/p/pybluez/wiki/Documentation)
+	* `apt-get install libbluetooth-dev`
+	* [`pip install pybluz`](https://code.google.com/p/pybluez/wiki/Documentation)
 * Copy `python/` contents to RPi
 
 ### 3. Android

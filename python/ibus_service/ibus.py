@@ -15,8 +15,12 @@ class IBUSService():
     timeout = 1
     thread = None
 
-    # commands
-    radio_switch_mode = 'f004684823f7'.decode('hex')
+    # special packets
+    packet_car_locked = ''
+    packet_car_unlocked = ''
+    packet_switch_radio_mode = 'f004684823f7'
+    packet_gps_location_update = ''
+    packet_steering_wheel_ctl_mode = ''
 
     def __init__(self):
         """

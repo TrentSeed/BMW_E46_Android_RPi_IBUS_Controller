@@ -49,11 +49,11 @@ class AndroidBluetoothService():
         self.client_sock, self.client_info = self.server_sock.accept()
         print("Accepted connection from ", self.client_info)
 
-        # debug only - send test packets over Bluetooth
-        #self.start_debug_sending()
-
         # start listening for data
-        self.start_listening()
+        #self.start_listening()
+
+        # debug only - send test packets over Bluetooth
+        self.start_debug_sending()
         return
 
     def destroy(self):
@@ -120,10 +120,10 @@ class AndroidBluetoothService():
             print("Starting to listen for data...")
             while True:
                 data = self.client_sock.recv(1024)
-                if len(data) == 0:
-                    break
-                self.process_data_from_android(data)
+                if len(data) > 0:
+                    self.process_data_from_android(data)
         except IOError:
+            print ("Android device was disconnected...")
             pass
 
     def start_debug_sending(self):
@@ -135,10 +135,10 @@ class AndroidBluetoothService():
         while True:
             # create test packet
             test_packet = IBUSPacket(source_id="f0", length=str(test_length), destination_id="68",
-                                     data="32", xor_checksum="ff", raw="f0"+str(test_length)+"6832ff00")
+                                     data="32", xor_checksum="ff", raw="f0"+str(test_length)+"ff00")
             self.send_packet_to_android(test_packet)
             test_length += 1
-            time.sleep(10)
+            time.sleep(5)
 
     @staticmethod
     def process_data_from_android(data):
