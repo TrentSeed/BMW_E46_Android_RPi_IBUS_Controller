@@ -24,6 +24,9 @@ There are 3 main components of the solution:<br />
 	* `easy_install pyserial`
 	* `apt-get install libbluetooth-dev`
 	* [`pip install pybluz`](https://code.google.com/p/pybluez/wiki/Documentation)
+* Install Bluetooth stack and confirm dongle/adapter is supported
+    * One tutorial [can be found here](http://plugable.com/2013/12/10/using-the-plugable-usb-bt4le-bluetooth-adapter-with-the-raspberry-pi)
+    * Follow the ['accepted answer' instructions](http://stackoverflow.com/questions/14618277/rfcomm-without-pairing-using-pybluez-on-debian/14827036#14827036)
 * Copy `python/` contents to RPi
 
 ### 3. Android

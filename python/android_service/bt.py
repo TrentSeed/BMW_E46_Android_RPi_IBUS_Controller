@@ -11,7 +11,8 @@ import threading
 class AndroidBluetoothService():
 
     # configuration
-    bluetooth_address = "10:3B:59:4E:83:77"
+    bluetooth_address = "5C:AC:4C:C8:E2:7E"  # ThinkPad T410
+    #bluetooth_address = "00:02:72:CC:EF:3C"  # Asus USB-BT400
     client_sock = None
     client_info = None
     rfcomm_channel = None
@@ -50,10 +51,10 @@ class AndroidBluetoothService():
         print("Accepted connection from ", self.client_info)
 
         # start listening for data
-        #self.start_listening()
+        self.start_listening()
 
         # debug only - send test packets over Bluetooth
-        self.start_debug_sending()
+        #self.start_debug_sending()
         return
 
     def destroy(self):
@@ -77,7 +78,7 @@ class AndroidBluetoothService():
         Sends data via Bluetooth socket connection
         """
         try:
-            print ("Sending message...")
+            print ("Sending encapsulated IBUSPacket...")
             # encapsulate IBUS packet in BlueBUSPacket
             packet = BlueBUSPacket(packet_type=BlueBUSPacket.TYPE_PACKET,
                                    data=json.dumps(ibus_packet.as_dict()))
