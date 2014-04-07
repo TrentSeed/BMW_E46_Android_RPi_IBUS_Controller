@@ -30,11 +30,11 @@ public class BlueBusPacket {
 		return this.type == BlueBusPacket.TYPE_COMMAND;
 	}
 	
-	public IBUSPacket getIBUSPacket(){
+	public IBUSPacket[] getIBUSPackets(){
 		if(this.isTypePacket() == false) return null;
 		try{
-			IBUSPacket ibPacket = new Gson().fromJson(this.data, IBUSPacket.class);
-			return ibPacket;
+			IBUSPacket[] ibPackets = new Gson().fromJson(this.data, IBUSPacket[].class);
+			return ibPackets;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

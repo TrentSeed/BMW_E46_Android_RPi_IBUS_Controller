@@ -11,14 +11,21 @@ class IBUSService():
     baudrate = 9600
     handle = None
     parity = serial.PARITY_EVEN
-    port = 6
+    #port = 6  # ThinkPad T410
+    port = '/dev/ttyUSB0'  # Raspberry Pi
     timeout = 1
     thread = None
 
     # special packets
     packet_car_locked = ''
     packet_car_unlocked = ''
-    packet_switch_radio_mode = 'f004684823f7'
+    packet_switch_mode_down = 'f004684823f7'
+    packet_switch_mode_down_extra_sec = 'f004684863b7'
+    packet_switch_mode_release = 'f0046848A377'
+    packet_press_fm = 'f004684831e5'
+    packet_volume_up = '50046832111f'
+    packet_volume_down = '50046832101e'
+    packet_radio_power = 'f004684806d2'
     packet_gps_location_update = ''
     packet_steering_wheel_ctl_mode = ''
 
@@ -64,8 +71,9 @@ class IBUSService():
                              | ------ Length -------|
 
         """
+        packets = []
         hex_dump = dump.encode('hex')
-        print hex_dump
+        print "Hex Dump: " + hex_dump
         while index < len(hex_dump):
             try:
                 # construct packet while reading
@@ -107,35 +115,28 @@ class IBUSService():
                 packet = IBUSPacket(source_id=source_id, length=total_length_data, destination_id=destination_id,
                                     data=data, xor_checksum=xor, raw=current_packet)
 
-                # process packet data (and send to Android)
-                self.process_packet(packet)
+                # add packet if valid
+                if packet.is_valid():
+                    packets.append(packet)
+
             except Exception as e:
                 print "Error processing bus dump: " + e.message
 
-    @staticmethod
-    def process_packet(packet):
-        """
-        Process packet and determine message to send to Android
-        """
-        if not packet.is_valid():
-            return False
+            # process packets data (and send to Android)
+            self.process_packets(packets)
 
+    @staticmethod
+    def process_packets(packets):
+        """
+        Process packets [] and determine message to send to Android
+        """
         # check if android service ready
         if globals.android_service is not None:
             try:
-                # check if 'Next Track' steering wheel command
-                if packet.source_id == "50" and packet.destination_id == "68":
-                    globals.android_service.send_command_to_android("NEXT")
-
-                # TODO check if 'Mode' pressed from steering wheel
-
-                # TODO check if 'GPS Location' text update received
-
-                # send packet to android
-                globals.android_service.send_packet_to_android(packet)
-
+                # send packets to android
+                globals.android_service.send_packets_to_android(packets)
             except Exception as e:
-                print e.message + "\n" + "Failed to send to android"
+                print "Error: " + e.message + "\nFailed to send packets to android"
                 return False
 
         return True
@@ -144,5 +145,6 @@ class IBUSService():
         """
         Toggles 'Aux / Radio / CD-Player'
         """
-        print "Writing to IBUS " + 'f004684823f7'.decode('hex')
-        self.handle.write('f004684823f7'.decode('hex'))
+        toggle_radio_packets = 'f004684823f7f0046848a377680b3ba562014120464d412095'
+        print "Writing to IBUS: hex = " + toggle_radio_packets
+        self.handle.write(toggle_radio_packets.decode('hex'))

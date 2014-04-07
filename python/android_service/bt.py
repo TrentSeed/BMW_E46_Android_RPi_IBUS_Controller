@@ -11,8 +11,8 @@ import threading
 class AndroidBluetoothService():
 
     # configuration
-    bluetooth_address = "5C:AC:4C:C8:E2:7E"  # ThinkPad T410
-    #bluetooth_address = "00:02:72:CC:EF:3C"  # Asus USB-BT400
+    #bluetooth_address = "5C:AC:4C:C8:E2:7E"  # ThinkPad T410
+    bluetooth_address = "00:02:72:CC:EF:3C"  # Asus USB-BT400
     client_sock = None
     client_info = None
     rfcomm_channel = None
@@ -73,18 +73,23 @@ class AndroidBluetoothService():
             self.server_sock = None
             self.thread = None
 
-    def send_packet_to_android(self, ibus_packet):
+    def send_packets_to_android(self, ibus_packets):
         """
         Sends data via Bluetooth socket connection
         """
         try:
-            print ("Sending encapsulated IBUSPacket...")
+            print ("Sending encapsulated IBUSPacket(s)...")
+            packets = []
+            for ibus_packet in ibus_packets:
+                packets.append(ibus_packet.as_dict())
+
             # encapsulate IBUS packet in BlueBUSPacket
             packet = BlueBUSPacket(packet_type=BlueBUSPacket.TYPE_PACKET,
-                                   data=json.dumps(ibus_packet.as_dict()))
+                                   data=json.dumps(packets))
 
             # serialize BlueBusPacket and send
             json_data = json.dumps(packet.as_dict())
+            print json_data
             self.client_sock.send(json_data)
 
             # packet sent successfully
@@ -135,9 +140,11 @@ class AndroidBluetoothService():
         test_length = 10
         while True:
             # create test packet
+            packets = []
             test_packet = IBUSPacket(source_id="f0", length=str(test_length), destination_id="68",
                                      data="32", xor_checksum="ff", raw="f0"+str(test_length)+"ff00")
-            self.send_packet_to_android(test_packet)
+            packets.append(test_packet)
+            self.send_packets_to_android(packets)
             test_length += 1
             time.sleep(5)
 
@@ -153,11 +160,8 @@ class AndroidBluetoothService():
         print("Received BlueBusPacket from Android [" + str(len(packet.data)) + "]")
 
         # TEMPORARY - toggle radio mode from this event
-        """
         try:
             globals.ibus_service.radio_toggle_mode()
-            print "Action - Toggling radio mode"
         except Exception:
             print "Action Failed - Unable to toggle radio mode"
-        """
         return
