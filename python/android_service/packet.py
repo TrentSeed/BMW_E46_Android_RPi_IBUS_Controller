@@ -43,6 +43,27 @@ class BlueBUSPacket():
         return "BlueBusPacket\nType = " + self.get_type_name(self.type) + "\n"\
                + "Data = " + str(self.data) + "\n"
 
+    def get_ibus_packets(self):
+        """
+        Returns encapsulated IBUSPacket(s)
+        """
+        if not self.is_type_ibus_packet():
+            return False
+
+        # TODO create IBUSPacket object(s)
+
+    def is_type_ibus_packet(self):
+        """
+        Determines if encapsulated IBUSPacket type
+        """
+        return self.type == "0"
+
+    def is_type_command(self):
+        """
+        Determines if command type
+        """
+        return self.type == "1"
+
     @staticmethod
     def get_type_name(packet_type):
         """

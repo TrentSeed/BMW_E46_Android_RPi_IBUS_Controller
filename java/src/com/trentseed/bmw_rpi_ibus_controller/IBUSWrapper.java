@@ -90,11 +90,67 @@ public class IBUSWrapper {
 	public static void toggleMode(Activity thisActivity){
 		BlueBusPacket bbPacket = new BlueBusPacket();
 		bbPacket.type = 1;
-		bbPacket.data = "TOGGLE_MODE";
+		bbPacket.data = "f004684823f7f0046848a377680b3ba562014120464d412095";
 		try {
 			if(BluetoothInterface.isConnected()){
 				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
-				Log.d("BMW", "Writing message...");
+				Log.d("BMW", "Writing toggle mode message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void volumeUp(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "50046832111f";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing vol up message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void volumeDown(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "50046832101e";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing vol down message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void pressAccept(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "f0043b480582f0043b488502";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing press accept message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void toggleRadioPower(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "f004684806d2";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing toggle radio power message...");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

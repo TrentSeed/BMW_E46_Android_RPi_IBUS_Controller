@@ -125,7 +125,7 @@ class AndroidBluetoothService():
         try:
             print("Starting to listen for data...")
             while True:
-                data = self.client_sock.recv(1024)
+                data = self.client_sock.recv(2048)
                 if len(data) > 0:
                     self.process_data_from_android(data)
         except IOError:
@@ -159,9 +159,14 @@ class AndroidBluetoothService():
                                data=parsed_json['data'])
         print("Received BlueBusPacket from Android [" + str(len(packet.data)) + "]")
 
-        # TEMPORARY - toggle radio mode from this event
+        # check if command to perform (i.e. write to IBUS)
+        globals.ibus_service.write_to_ibus(packet.data.decode('hex'))
+
+        return
+        """
         try:
             globals.ibus_service.radio_toggle_mode()
         except Exception:
             print "Action Failed - Unable to toggle radio mode"
         return
+        """

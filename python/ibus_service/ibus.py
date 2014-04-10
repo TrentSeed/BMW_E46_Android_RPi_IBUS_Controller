@@ -26,8 +26,10 @@ class IBUSService():
     packet_volume_up = '50046832111f'
     packet_volume_down = '50046832101e'
     packet_radio_power = 'f004684806d2'
+    packet_accept_btn_down = 'f0043b480582'
+    packet_accept_btn_release = 'f0043b488502'
     packet_gps_location_update = ''
-    packet_steering_wheel_ctl_mode = ''
+    packet_str_wheel_ctl_mode = ''
 
     def __init__(self):
         """
@@ -140,6 +142,15 @@ class IBUSService():
                 return False
 
         return True
+
+    def write_to_ibus(self, hex_value):
+        """
+        Writes the provided hex packet(s) to the bus
+        """
+        try:
+            self.handle.write(hex_value)
+        except Exception as e:
+            print "Cannot write to IBUS: " + e.message
 
     def radio_toggle_mode(self):
         """

@@ -53,6 +53,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
+            <Button
+                android:id="@+id/btnAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="42dp"
+                android:layout_marginLeft="41dp"
+                android:text="Accept" />
+
+            <Button
+                android:id="@+id/btnRadioPower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnAccept"
+                android:layout_alignBottom="@+id/btnAccept"
+                android:layout_marginLeft="24dp"
+                android:layout_toRightOf="@+id/btnAccept"
+                android:text="Radio Power" />
+
+            <Button
+                android:id="@+id/btnVolUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnRadioPower"
+                android:layout_alignBottom="@+id/btnRadioPower"
+                android:layout_marginLeft="27dp"
+                android:layout_toRightOf="@+id/btnRadioPower"
+                android:text="Vol Up" />
+
+            <Button
+                android:id="@+id/btnVolDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnVolUp"
+                android:layout_alignBottom="@+id/btnVolUp"
+                android:layout_marginLeft="31dp"
+                android:layout_toRightOf="@+id/btnVolUp"
+                android:text="Vol Down" />
+
         </RelativeLayout>
 
     </LinearLayout>

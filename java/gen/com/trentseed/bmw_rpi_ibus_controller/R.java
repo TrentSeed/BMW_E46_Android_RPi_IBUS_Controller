@@ -38,10 +38,14 @@ public final class R {
         public static final int rpi_logo=0x7f02000e;
     }
     public static final class id {
-        public static final int ImageView1=0x7f09000e;
+        public static final int ImageView1=0x7f090012;
         public static final int LinearLayout1=0x7f090008;
-        public static final int SeekBar01=0x7f090010;
-        public static final int action_settings=0x7f090011;
+        public static final int SeekBar01=0x7f090014;
+        public static final int action_settings=0x7f090015;
+        public static final int btnAccept=0x7f09000e;
+        public static final int btnRadioPower=0x7f09000f;
+        public static final int btnVolDown=0x7f090011;
+        public static final int btnVolUp=0x7f090010;
         public static final int ivBMWEmblem=0x7f09000a;
         public static final int ivBack=0x7f090003;
         public static final int ivBusActivity=0x7f090005;
@@ -49,7 +53,7 @@ public final class R {
         public static final int llVerticallWrapper=0x7f090002;
         public static final int lvBusEvents=0x7f090006;
         public static final int rlBackground=0x7f090000;
-        public static final int seekBar1=0x7f09000f;
+        public static final int seekBar1=0x7f090013;
         public static final int tvBtnIBUS=0x7f090004;
         public static final int tvBtnLocation=0x7f09000b;
         public static final int tvBtnRadio=0x7f090009;
