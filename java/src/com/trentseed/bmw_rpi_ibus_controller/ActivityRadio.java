@@ -16,6 +16,9 @@ public class ActivityRadio extends Activity {
 	private Button btnVolUp;
 	private Button btnVolDown;
 	private Button btnRadioPower;
+	private Button btnDriverSeatForward;
+	private Button btnDriverSeatBack;
+	private Button btnLock;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class ActivityRadio extends Activity {
 		btnVolUp = (Button) findViewById(R.id.btnVolUp);
 		btnVolDown = (Button) findViewById(R.id.btnVolDown);
 		btnRadioPower = (Button) findViewById(R.id.btnRadioPower);
+		btnDriverSeatForward = (Button) findViewById(R.id.btnDriverSeatForward);
+		btnDriverSeatBack = (Button) findViewById(R.id.btnDriverSeatBack);
+		btnLock = (Button) findViewById(R.id.btnLock);
 		
 		// set click handlers
 		ivBack.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +68,24 @@ public class ActivityRadio extends Activity {
 			@Override
 			public void onClick(View v) {
 				IBUSWrapper.toggleRadioPower();				
+			}
+		});
+		btnDriverSeatForward.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.moveDriverSeat(true);				
+			}
+		});
+		btnDriverSeatBack.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.moveDriverSeat(false);				
+			}
+		});
+		btnLock.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.lockCar();
 			}
 		});
 		

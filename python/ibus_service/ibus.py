@@ -17,8 +17,17 @@ class IBUSService():
     thread = None
 
     # special packets
-    packet_car_locked = ''
-    packet_car_unlocked = ''
+    packet_lock_car = '3F05000C340103'
+    packet_window_driver_open = '3F05000C520165'
+    packet_window_driver_close = '3F05000C530164'
+    packet_window_passenger_open = '3F05000C540163'
+    packet_window_passenger_close = '3F05000C550162'
+    packet_window_driver_rear_open = '3F05000C410176'
+    packet_window_driver_rear_close = '3F05000C420175'
+    packet_window_passenger_rear_open = '3F05000C440173'
+    packet_window_passenger_rear_close = '3F05000C430174'
+    packet_driver_seat_move_forward = '3F06720C01010047'
+    packet_driver_seat_move_back = '3F06720C01020044'
     packet_switch_mode_down = 'f004684823f7'
     packet_switch_mode_down_extra_sec = 'f004684863b7'
     packet_switch_mode_release = 'f0046848A377'
@@ -28,8 +37,6 @@ class IBUSService():
     packet_radio_power = 'f004684806d2'
     packet_accept_btn_down = 'f0043b480582'
     packet_accept_btn_release = 'f0043b488502'
-    packet_gps_location_update = ''
-    packet_str_wheel_ctl_mode = ''
 
     def __init__(self):
         """

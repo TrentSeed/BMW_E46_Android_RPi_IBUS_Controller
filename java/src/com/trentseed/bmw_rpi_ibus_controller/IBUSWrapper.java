@@ -16,9 +16,6 @@ import android.view.KeyEvent;
  */
 public class IBUSWrapper {
 
-	// bluetooth proprietary commands
-	public static final String COMMAND_TRACK_NEXT = "NEXT";
-
 	// bmw device identifiers
 	public static final String DEVICE_BROADCAST_00 = "00";
 	public static final String DEVICE_CDW_CD_PLAYER = "18";
@@ -38,17 +35,7 @@ public class IBUSWrapper {
 	public static final String DEVICE_LIGHTS_WIPERS_SEATS = "ed";
 	public static final String DEVICE_BMB_BOARD_MONITOR_BTNS = "f0";
 	public static final String DEVICE_BROADCAST_FF = "ff";
-	
-	/**
-	 * Sends a command to the RaspberryPi
-	 * @param command
-	 * @return
-	 */
-	public static boolean sendPacket(IBUSPacket ibPacket){
-		// TODO encapsulate and send packet via bluetooth
-		return false;
-	}
-	
+		
 	/**
 	 * Processes a received IBUSPacket (this is extracted from original BlueBusPacket)
 	 * BMW --(USB)--> RaspberryPi --(Bluetooth)--> Android
@@ -151,6 +138,95 @@ public class IBUSWrapper {
 			if(BluetoothInterface.isConnected()){
 				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
 				Log.d("BMW", "Writing toggle radio power message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void windowDriverFront(boolean down){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		if(down) bbPacket.data = "3F05000C520165";
+		else bbPacket.data = "3F05000C530164";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing window message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void windowDriverRear(boolean down){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		if(down) bbPacket.data = "3F05000C410176";
+		else bbPacket.data = "3F05000C420175";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing window message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void windowPassengerFront(boolean down){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		if(down) bbPacket.data = "3F05000C540163";
+		else bbPacket.data = "3F05000C550162";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing window message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void windowPassengerRear(boolean down){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		if(down) bbPacket.data = "3F05000C440173";
+		else bbPacket.data = "3F05000C430174";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing window message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void moveDriverSeat(boolean forward){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		if(forward) bbPacket.data = "3F06720C01010047";
+		else bbPacket.data = "3F06720C01020044";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing driver seat message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void lockCar(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "3F05000C340103";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing lock car message...");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

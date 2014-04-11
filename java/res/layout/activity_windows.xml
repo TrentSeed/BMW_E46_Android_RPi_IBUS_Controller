@@ -44,20 +44,126 @@
             android:layout_height="match_parent"
             android:padding="30dp" >
 
-            <SeekBar
-                android:id="@+id/seekBar1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="75dp" />
+                android:layout_centerHorizontal="true" >
 
-            <SeekBar
-                android:id="@+id/SeekBar01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="Driver (Front)"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <Button
+                        android:id="@+id/btnDriverFrontUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Up" />
+
+                    <Button
+                        android:id="@+id/btnDriverFrontDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Down" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/TextView01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="Driver (Rear)"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <Button
+                        android:id="@+id/btnDriverRearUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Up" />
+
+                    <Button
+                        android:id="@+id/btnDriverRearDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Down" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="Passenger (Front)"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <Button
+                        android:id="@+id/btnPassengerFrontUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Up" />
+
+                    <Button
+                        android:id="@+id/btnPassengerFrontDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Down" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="Passenger (Rear)"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <Button
+                        android:id="@+id/btnPassengerRearUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Up" />
+
+                    <Button
+                        android:id="@+id/btnPassengerRearDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="Down" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
 

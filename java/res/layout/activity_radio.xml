@@ -93,6 +93,35 @@
                 android:layout_toRightOf="@+id/btnVolUp"
                 android:text="Vol Down" />
 
+            <Button
+                android:id="@+id/btnDriverSeatForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnVolDown"
+                android:layout_alignBottom="@+id/btnVolDown"
+                android:layout_marginLeft="81dp"
+                android:layout_toRightOf="@+id/btnVolDown"
+                android:text="Driver Seat Forward" />
+
+            <Button
+                android:id="@+id/btnDriverSeatBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btnDriverSeatForward"
+                android:layout_alignBottom="@+id/btnDriverSeatForward"
+                android:layout_marginLeft="22dp"
+                android:layout_toRightOf="@+id/btnDriverSeatForward"
+                android:text="Driver Seat Back" />
+
+            <Button
+                android:id="@+id/btnLock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/btnAccept"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="18dp"
+                android:text="Lock" />
+
         </RelativeLayout>
 
     </LinearLayout>
