@@ -31,6 +31,7 @@ class IBUSService():
     packet_switch_mode_down = 'f004684823f7'
     packet_switch_mode_down_extra_sec = 'f004684863b7'
     packet_switch_mode_release = 'f0046848A377'
+    pack_switch_mode_release_callback = '680b3ba562014120464d412095'
     packet_press_fm = 'f004684831e5'
     packet_volume_up = '50046832111f'
     packet_volume_down = '50046832101e'
@@ -158,11 +159,3 @@ class IBUSService():
             self.handle.write(hex_value)
         except Exception as e:
             print "Cannot write to IBUS: " + e.message
-
-    def radio_toggle_mode(self):
-        """
-        Toggles 'Aux / Radio / CD-Player'
-        """
-        toggle_radio_packets = 'f004684823f7f0046848a377680b3ba562014120464d412095'
-        print "Writing to IBUS: hex = " + toggle_radio_packets
-        self.handle.write(toggle_radio_packets.decode('hex'))

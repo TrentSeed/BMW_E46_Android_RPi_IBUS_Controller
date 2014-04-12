@@ -15,6 +15,7 @@ class AndroidBluetoothService():
     bluetooth_address = "00:02:72:CC:EF:3C"  # Asus USB-BT400
     client_sock = None
     client_info = None
+    conn_established = False
     rfcomm_channel = None
     service_uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
     server_sock = None
@@ -48,6 +49,7 @@ class AndroidBluetoothService():
 
         # accept received connection
         self.client_sock, self.client_info = self.server_sock.accept()
+        self.conn_established = True
         print("Accepted connection from ", self.client_info)
 
         # start listening for data
@@ -63,6 +65,7 @@ class AndroidBluetoothService():
         """
         try:
             print "Destroying BLUETOOTH service..."
+            self.conn_established = False
             self.client_sock.close()
             self.server_sock.close()
             self.client_sock = None
@@ -77,27 +80,30 @@ class AndroidBluetoothService():
         """
         Sends data via Bluetooth socket connection
         """
-        try:
-            print ("Sending encapsulated IBUSPacket(s)...")
-            packets = []
-            for ibus_packet in ibus_packets:
-                packets.append(ibus_packet.as_dict())
+        if self.conn_established:
+            try:
+                print ("Sending encapsulated IBUSPacket(s)...")
+                packets = []
+                for ibus_packet in ibus_packets:
+                    packets.append(ibus_packet.as_dict())
 
-            # encapsulate IBUS packet in BlueBUSPacket
-            packet = BlueBUSPacket(packet_type=BlueBUSPacket.TYPE_PACKET,
-                                   data=json.dumps(packets))
+                # encapsulate IBUS packet in BlueBUSPacket
+                packet = BlueBUSPacket(packet_type=BlueBUSPacket.TYPE_PACKET,
+                                       data=json.dumps(packets))
 
-            # serialize BlueBusPacket and send
-            json_data = json.dumps(packet.as_dict())
-            print json_data
-            self.client_sock.send(json_data)
+                # serialize BlueBusPacket and send
+                json_data = json.dumps(packet.as_dict())
+                print json_data
+                self.client_sock.send(json_data)
 
-            # packet sent successfully
-            #print packet
-            return True
-        except Exception as e:
-            print e
-            return False
+                # packet sent successfully
+                #print packet
+                return True
+            except Exception as e:
+                # socket was closed, graceful restart
+                print "Error: " + e.message
+                globals.restart_services()
+                return False
 
     def send_command_to_android(self, command):
         """
@@ -130,6 +136,7 @@ class AndroidBluetoothService():
                     self.process_data_from_android(data)
         except IOError:
             print ("Android device was disconnected...")
+            globals.restart_services()
             pass
 
     def start_debug_sending(self):
