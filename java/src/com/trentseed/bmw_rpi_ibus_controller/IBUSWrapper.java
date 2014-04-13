@@ -77,7 +77,7 @@ public class IBUSWrapper {
 	public static void toggleMode(Activity thisActivity){
 		BlueBusPacket bbPacket = new BlueBusPacket();
 		bbPacket.type = 1;
-		bbPacket.data = "f004684823f7f0046848a377680b3ba562014120464d412095";
+		bbPacket.data = "f004684823f7" + "f0046848a377" + "680b3ba562014120464d412095";
 		try {
 			if(BluetoothInterface.isConnected()){
 				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
@@ -119,7 +119,7 @@ public class IBUSWrapper {
 	public static void pressAccept(){
 		BlueBusPacket bbPacket = new BlueBusPacket();
 		bbPacket.type = 1;
-		bbPacket.data = "f0043b480582f0043b488502";
+		bbPacket.data = "f0043b480582" + "f0043b488502";
 		try {
 			if(BluetoothInterface.isConnected()){
 				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
