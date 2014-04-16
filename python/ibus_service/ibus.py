@@ -60,7 +60,8 @@ class IBUSService():
         """
         packets = []
         hex_dump = dump.encode('hex')
-        print "Hex Dump: " + hex_dump
+        if globals.debug:
+            print "Hex Dump: " + hex_dump
         while index < len(hex_dump):
             try:
                 # construct packet while reading
@@ -74,8 +75,8 @@ class IBUSService():
                 # extract length info
                 length = hex_dump[index:(index+2)]
                 current_packet += length
-                total_length_data = int(length, 16) - 4
-                total_length_hex_chars = total_length_data * 2
+                total_length_data = int(length, 16)
+                total_length_hex_chars = (total_length_data * 2) - 4
                 index += 2
 
                 # extract destination id
@@ -105,6 +106,10 @@ class IBUSService():
                 # add packet if valid
                 if packet.is_valid():
                     packets.append(packet)
+
+                # check for special packets
+                #if current_packet == "5004ff3b40d0":  # 'Mode' from Steering Wheel Controls
+                    #self.write_to_ibus("f004684823f7" + "f0046848a377" + "680b3ba562014120464d412095")
 
             except Exception as e:
                 print "Error processing bus dump: " + e.message
@@ -136,3 +141,4 @@ class IBUSService():
             self.handle.write(hex_value)
         except Exception as e:
             print "Cannot write to IBUS: " + e.message
+            globals.restart_services()

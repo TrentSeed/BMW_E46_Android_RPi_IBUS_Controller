@@ -18,6 +18,11 @@ import android.widget.TextView;
  */
 public class ActivityMain extends Activity {
 	
+	// class objects
+	public static boolean gpsIsCityToggle = true;
+	public static String gpsCity = "";
+	public static String gpsStreet = "";
+	
 	// layout objects
 	private ImageView ivBmwEmblem;
 	private TextView tvBtnRadio;
@@ -100,6 +105,9 @@ public class ActivityMain extends Activity {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    startActivityForResult(enableBtIntent, 100);
 		}
+		
+		// reset navigation on screen location
+		updateLocationOnScreen();
 	}
 	
 	@Override
@@ -118,4 +126,42 @@ public class ActivityMain extends Activity {
 		}
 	}
 	
+	/**
+	 * Updates the UI with latest location information provided by GPS
+	 */
+	public void updateLocationOnScreen(){
+		tvBtnLocation.setText(gpsStreet + "\n" + gpsCity);
+	}
+	
+	/**
+	 * Received an IBUSPacket, determine if interesting
+	 */
+	public void receivedIBUSPacket(IBUSPacket ibPacket){
+		// navigation GPS information
+		if(ibPacket.source_id.equals("7f") && ibPacket.destination_id.equals("c8")){
+			if(gpsIsCityToggle){
+				gpsCity = getAsciiFromHex(ibPacket.data);
+				gpsIsCityToggle = false;
+			}else{
+				gpsStreet = getAsciiFromHex(ibPacket.data);
+				gpsIsCityToggle = true;
+			}
+			updateLocationOnScreen();
+		}
+	}
+	
+	/**
+	 * Parses hex string and returns character representation
+	 * @param hex
+	 * @return
+	 * @see http://stackoverflow.com/a/4785776/714666
+	 */
+	public String getAsciiFromHex(String hex){
+		StringBuilder output = new StringBuilder();
+	    for (int i = 0; i < hex.length(); i+=2) {
+	        String str = hex.substring(i, i+2);
+	        output.append((char)Integer.parseInt(str, 16));
+	    }
+	    return output.toString();
+	}
 }

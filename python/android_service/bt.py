@@ -93,7 +93,8 @@ class AndroidBluetoothService():
 
                 # serialize BlueBusPacket and send
                 json_data = json.dumps(packet.as_dict())
-                print json_data
+                if globals.debug:
+                    print json_data
                 self.client_sock.send(json_data)
 
                 # packet sent successfully
@@ -168,12 +169,4 @@ class AndroidBluetoothService():
 
         # check if command to perform (i.e. write to IBUS)
         globals.ibus_service.write_to_ibus(packet.data.decode('hex'))
-
         return
-        """
-        try:
-            globals.ibus_service.radio_toggle_mode()
-        except Exception:
-            print "Action Failed - Unable to toggle radio mode"
-        return
-        """

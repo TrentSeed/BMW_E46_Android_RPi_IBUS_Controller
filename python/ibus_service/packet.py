@@ -45,9 +45,8 @@ class IBUSPacket():
                 or self.data is None or self.xor_checksum is None:
             return False
 
-        # TODO XOR checksum calculation
-
-        return True
+        # XOR checksum calculation
+        return self.xor_checksum == self.calculate_xor_checksum()
 
     def __str__(self):
         """
@@ -100,3 +99,35 @@ class IBUSPacket():
             return device_names[device_id]
         except KeyError:
             return "Unknown"
+
+    def calculate_xor_checksum(self):
+        """
+        Calculates XOR value for packet
+        """
+        b_source = IBUSPacket.hex_to_bin(self.source_id)
+        b_length = IBUSPacket.hex_to_bin(self.length)
+        b_destination = IBUSPacket.hex_to_bin(self.destination_id)
+        b_data = IBUSPacket.hex_to_bin(self.data)
+
+        print str(b_source)
+        print str(b_length)
+        print str(b_destination)
+        print str(b_data)
+
+        # TODO return calculated value
+        return self.xor_checksum
+
+    @staticmethod
+    def hex_to_bin(hex_val):
+        """
+        Takes a string representation of hex data with
+        arbitrary length and converts to string representation
+        of binary.  Includes padding 0s
+
+        Reference: http://stackoverflow.com/a/7373476/714666
+        """
+        the_len = len(hex_val)*4
+        bin_val = bin(int(hex_val, 16))[2:]
+        while (len(bin_val)) < the_len:
+            bin_val = '0' + bin_val
+        return bin_val

@@ -3,8 +3,9 @@ from ibus_service.ibus import IBUSService
 from android_service.bt import AndroidBluetoothService
 
 # global services
-ibus_service = None
 android_service = None
+debug = False
+ibus_service = None
 
 
 def start_services(auto_retry=True):

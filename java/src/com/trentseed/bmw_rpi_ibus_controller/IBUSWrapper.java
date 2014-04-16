@@ -35,6 +35,11 @@ public class IBUSWrapper {
 	public static final String DEVICE_LIGHTS_WIPERS_SEATS = "ed";
 	public static final String DEVICE_BMB_BOARD_MONITOR_BTNS = "f0";
 	public static final String DEVICE_BROADCAST_FF = "ff";
+	
+	// special packets
+	public static final String KEY_INSERTED = "4405bf7404028c";
+	public static final String KEY_REMOTE_LOCK = "0004bf7212db";
+	public static final String KEY_REMOTE_UNLOCK = "0004df0004bf";
 		
 	/**
 	 * Processes a received IBUSPacket (this is extracted from original BlueBusPacket)
@@ -42,8 +47,18 @@ public class IBUSWrapper {
 	 * @param command
 	 */
 	public static void processPacket(IBUSPacket ibPacket){
+		// check for special packets
+		if(ibPacket.raw.equals(KEY_INSERTED)){
+			Log.d("BMW", "Waking android screen now...");
+			WakeLocker.acquire(BluetoothInterface.mActivity);
+			WakeLocker.release();
+		}
+		
 		// perform activity specific actions
-		if(BluetoothInterface.mActivity instanceof ActivityIBUS){
+		if(BluetoothInterface.mActivity instanceof ActivityMain){
+			((ActivityMain) BluetoothInterface.mActivity).receivedIBUSPacket(ibPacket);
+			
+		}else if(BluetoothInterface.mActivity instanceof ActivityIBUS){
 			((ActivityIBUS) BluetoothInterface.mActivity).receivedIBUSPacket(ibPacket);
 			
 		}else if(BluetoothInterface.mActivity instanceof ActivityRadio){

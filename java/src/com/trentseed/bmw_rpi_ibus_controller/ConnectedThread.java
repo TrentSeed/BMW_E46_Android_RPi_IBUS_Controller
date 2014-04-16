@@ -27,15 +27,15 @@ class ConnectedThread extends Thread {
                 	String strBuffer = new String(buffer).trim();
                 	if(isJSONValid(strBuffer)){
 	                	BlueBusPacket bbPacket = new Gson().fromJson(strBuffer, BlueBusPacket.class);
-	                	final IBUSPacket ibPacket = bbPacket.getIBUSPackets()[0];
-	                	
-	                	//perform command
-	                	BluetoothInterface.mActivity.runOnUiThread(new Runnable() {
-	                	    @Override
-	                	    public void run() {
-	                	    	IBUSWrapper.processPacket(ibPacket);
-	                	    }
-	                	});
+	                	for(final IBUSPacket ibPacket : bbPacket.getIBUSPackets()){
+		                	//perform command
+		                	BluetoothInterface.mActivity.runOnUiThread(new Runnable() {
+		                	    @Override
+		                	    public void run() {
+		                	    	IBUSWrapper.processPacket(ibPacket);
+		                	    }
+		                	});
+	                	}
                 	}
                 }
             } catch (IOException e) {
