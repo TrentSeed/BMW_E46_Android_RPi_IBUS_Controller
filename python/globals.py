@@ -38,6 +38,17 @@ def restart_services():
     start_services()
 
 
+def restart_bluetooth():
+    """
+    Restarts Bluetooth communication and enters listening mode
+    """
+    print "Restarting Bluetooth service..."
+    global android_service
+    if android_service is not None:
+        android_service.destroy()
+    android_service = AndroidBluetoothService()
+
+
 def stop_services():
     """
     Destroys IBUS and Android services

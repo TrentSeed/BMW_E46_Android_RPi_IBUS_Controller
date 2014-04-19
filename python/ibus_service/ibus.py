@@ -97,7 +97,7 @@ class IBUSService():
                 # confirm full packet exists
                 expected_packet_length = (2 + 2 + 2 + total_length_hex_chars + 2)
                 if current_packet.__len__() != expected_packet_length:
-                    return False
+                    continue
 
                 # create packet
                 packet = IBUSPacket(source_id=source_id, length=total_length_data, destination_id=destination_id,

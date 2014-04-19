@@ -104,6 +104,7 @@ class IBUSPacket():
         """
         Calculates XOR value for packet
         """
+        """
         b_source = IBUSPacket.hex_to_bin(self.source_id)
         b_length = IBUSPacket.hex_to_bin(self.length)
         b_destination = IBUSPacket.hex_to_bin(self.destination_id)
@@ -113,7 +114,7 @@ class IBUSPacket():
         print str(b_length)
         print str(b_destination)
         print str(b_data)
-
+        """
         # TODO return calculated value
         return self.xor_checksum
 

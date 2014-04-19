@@ -35,7 +35,7 @@
       <file leaf-file-name="start.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="27" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="629">
+            <state line="12" column="27" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
               <folding />
             </state>
           </provider>
@@ -44,7 +44,18 @@
       <file leaf-file-name="globals.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/globals.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="867">
+            <state line="31" column="12" selection-start="876" selection-end="876" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1088">
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="run.sh" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/run.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="47" selection-start="59" selection-end="59" vertical-scroll-proportion="0.026275115" vertical-offset="0" max-vertical-offset="647">
               <folding />
             </state>
           </provider>
@@ -53,7 +64,7 @@
       <file leaf-file-name="bt.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/android_service/bt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="162" column="11" selection-start="5406" selection-end="5406" vertical-scroll-proportion="0.0" vertical-offset="613" max-vertical-offset="2924">
+            <state line="28" column="8" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3009">
               <folding />
             </state>
           </provider>
@@ -68,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ibus.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ibus.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ibus_service/ibus.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="38" selection-start="4674" selection-end="4674" vertical-scroll-proportion="0.85" vertical-offset="1853" max-vertical-offset="2533">
+            <state line="1" column="0" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2533">
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -82,10 +93,8 @@
       <file leaf-file-name="packet.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ibus_service/packet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="11" selection-start="3419" selection-end="3419" vertical-scroll-proportion="0.0" vertical-offset="74" max-vertical-offset="2346">
-              <folding>
-                <marker date="1397425185592" expanded="true" signature="1053:1389" placeholder="..." />
-              </folding>
+            <state line="102" column="37" selection-start="3407" selection-end="3407" vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2363">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -113,12 +122,13 @@
         <option value="$PROJECT_DIR$/globals.py" />
         <option value="$PROJECT_DIR$/android_service/bt.py" />
         <option value="$PROJECT_DIR$/ibus_service/ibus.py" />
+        <option value="$PROJECT_DIR$/run.sh" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="125" />
-    <option name="y" value="5" />
+    <option name="x" value="159" />
+    <option name="y" value="1" />
     <option name="width" value="1094" />
     <option name="height" value="847" />
   </component>
@@ -148,7 +158,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -167,36 +176,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ibus_service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android_service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -347,12 +329,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="125" y="5" width="1094" height="847" extended-state="1" />
+    <frame x="159" y="1" width="1094" height="847" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25154322" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962447" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21040551" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18543047" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -362,11 +345,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -388,13 +370,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="32" selection-start="1850" selection-end="1850" vertical-scroll-proportion="0.0" vertical-offset="23" max-vertical-offset="765">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/start.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="8" selection-start="812" selection-end="812" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="833">
@@ -563,11 +538,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="23" selection-start="752" selection-end="752" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="714" />
-      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="23" selection-start="752" selection-end="752" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="714" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/start.py">
@@ -587,11 +562,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="24" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="731" />
-      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="24" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="731" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ibus_service/packet.py">
@@ -642,11 +617,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="5" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="527" />
-      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="5" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="527" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ibus_service/packet.py">
@@ -695,29 +670,13 @@
         <state line="273" column="17" selection-start="10402" selection-end="10402" vertical-scroll-proportion="-3.5518453" vertical-offset="6577" max-vertical-offset="13447" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="27" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ibus_service/packet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="11" selection-start="3419" selection-end="3419" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="2346">
-          <folding>
-            <marker date="1397425185592" expanded="true" signature="1053:1389" placeholder="..." />
-          </folding>
+        <state line="3" column="13" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -728,26 +687,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/globals.py">
+    <entry file="file://$PROJECT_DIR$/ibus_service/packet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+        <state line="102" column="37" selection-start="3407" selection-end="3407" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2363">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android_service/bt.py">
+    <entry file="file://$PROJECT_DIR$/start.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="11" selection-start="5406" selection-end="5406" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3026">
+        <state line="12" column="27" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/globals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="12" selection-start="876" selection-end="876" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1088">
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ibus_service/ibus.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="38" selection-start="4674" selection-end="4674" vertical-scroll-proportion="0.85" vertical-offset="1853" max-vertical-offset="2533">
+        <state line="1" column="0" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2533">
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android_service/bt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="8" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0" vertical-offset="59" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="47" selection-start="59" selection-end="59" vertical-scroll-proportion="0.026275115" vertical-offset="0" max-vertical-offset="647">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -103,7 +103,7 @@ class AndroidBluetoothService():
             except Exception as e:
                 # socket was closed, graceful restart
                 print "Error: " + e.message
-                globals.restart_services()
+                globals.restart_bluetooth()
                 return False
 
     def send_command_to_android(self, command):
@@ -122,7 +122,8 @@ class AndroidBluetoothService():
             #print packet
             return True
         except Exception as e:
-            print e
+            print "Error: " + e.message
+            globals.restart_bluetooth()
             return False
 
     def start_listening(self):
@@ -137,7 +138,7 @@ class AndroidBluetoothService():
                     self.process_data_from_android(data)
         except IOError:
             print ("Android device was disconnected...")
-            globals.restart_services()
+            globals.restart_bluetooth()
             pass
 
     def start_debug_sending(self):
@@ -161,12 +162,16 @@ class AndroidBluetoothService():
         """
         Processes received data from Bluetooth socket
         """
-        # inflate JSON data to BlueBUSPacket
-        parsed_json = json.loads(data)
-        packet = BlueBUSPacket(packet_type=parsed_json['type'],
-                               data=parsed_json['data'])
-        print("Received BlueBusPacket from Android [" + str(len(packet.data)) + "]")
+        try:
+            # inflate JSON data to BlueBUSPacket
+            parsed_json = json.loads(data)
+            packet = BlueBUSPacket(packet_type=parsed_json['type'],
+                                   data=parsed_json['data'])
+            print("Received BlueBusPacket from Android [" + str(len(packet.data)) + "]")
 
-        # check if command to perform (i.e. write to IBUS)
-        globals.ibus_service.write_to_ibus(packet.data.decode('hex'))
-        return
+            # check if command to perform (i.e. write to IBUS)
+            globals.ibus_service.write_to_ibus(packet.data.decode('hex'))
+            return
+        except Exception as e:
+            print "Error: " + e.message
+            return
