@@ -1,6 +1,8 @@
 package com.trentseed.bmw_rpi_ibus_controller;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,6 +11,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,18 +54,27 @@ public class ActivityIBUS extends Activity {
 		adapter = new AdapterIBUS(this);
 		lvBusEvents.setAdapter(adapter);
 		if(adapter.getCount() > 0) tvNoActivity.setVisibility(View.GONE);
+		lvBusEvents.setOnItemClickListener(new AbsListView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				IBUSPacket ibPacket = adapter.getItem(position);
+				AlertDialog.Builder msgBuilder = new AlertDialog.Builder(ActivityIBUS.this);
+				msgBuilder.setTitle("IBUS Packet");
+				msgBuilder.setMessage("Data: " + ibPacket.raw + "\nASCII: " + ibPacket.getAsciiFromRaw());
+				msgBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {}
+				});
+				msgBuilder.create().show();
+				
+			}
+		});
 	}
 	
 	/**
-	 * Received an IBUSPacket, store in cache and update ListView
+	 * Received an IBUSPacket update, refresh ListView
 	 */
 	public void receivedIBUSPacket(IBUSPacket ibPacket){
-		// add packet to local buffer (IBUS activity displays buffer)
-		int max_buffer = 50;
-		BluetoothInterface.mArrayListIBUSActivity.add(0, ibPacket);
-		if(BluetoothInterface.mArrayListIBUSActivity.size() > max_buffer){
-			BluetoothInterface.mArrayListIBUSActivity.remove(BluetoothInterface.mArrayListIBUSActivity.size()-1);
-		}
 		adapter.notifyDataSetChanged();
 		flashActivity();
 	}
@@ -95,6 +108,13 @@ public class ActivityIBUS extends Activity {
 			public void onAnimationStart(Animation animation){ }
 		});
 		ivBusActivity.startAnimation(fadeIn);
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		BluetoothInterface.mActivity = this;
+		BluetoothInterface.checkConnection();
 	}
 	
 }

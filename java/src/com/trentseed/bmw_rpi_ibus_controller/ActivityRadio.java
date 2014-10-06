@@ -18,7 +18,11 @@ public class ActivityRadio extends Activity {
 	private Button btnRadioPower;
 	private Button btnDriverSeatForward;
 	private Button btnDriverSeatBack;
+	private Button btnSunroofOpen;
+	private Button btnSunroofClose;
 	private Button btnLock;
+	private Button btnUnlock;
+	private Button btnMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,11 @@ public class ActivityRadio extends Activity {
 		btnRadioPower = (Button) findViewById(R.id.btnRadioPower);
 		btnDriverSeatForward = (Button) findViewById(R.id.btnDriverSeatForward);
 		btnDriverSeatBack = (Button) findViewById(R.id.btnDriverSeatBack);
+		btnSunroofOpen = (Button) findViewById(R.id.btnSunroofOpen);
+		btnSunroofClose = (Button) findViewById(R.id.btnSunroofClose);
 		btnLock = (Button) findViewById(R.id.btnLock);
+		btnUnlock = (Button) findViewById(R.id.btnUnlock);
+		btnMode = (Button) findViewById(R.id.btnMode);
 		
 		// set click handlers
 		ivBack.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +78,12 @@ public class ActivityRadio extends Activity {
 				IBUSWrapper.toggleRadioPower();				
 			}
 		});
+		btnMode.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.toggleMode(ActivityRadio.this);
+			}
+		});
 		btnDriverSeatForward.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -88,7 +102,31 @@ public class ActivityRadio extends Activity {
 				IBUSWrapper.lockCar();
 			}
 		});
-		
+		btnUnlock.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.unlockCar();
+			}
+		});
+		btnSunroofOpen.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.toggleSunroof(true);
+			}
+		});
+		btnSunroofClose.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				IBUSWrapper.toggleSunroof(false);
+			}
+		});
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		BluetoothInterface.mActivity = this;
+		BluetoothInterface.checkConnection();
 	}
 	
 }

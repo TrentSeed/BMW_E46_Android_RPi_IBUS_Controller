@@ -34,7 +34,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/arrow_back" />
+                android:src="@drawable/button_back_selector" />
 
             <TextView
                 android:id="@+id/tvBtnIBUS"
@@ -53,75 +53,89 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <Button
-                android:id="@+id/btnAccept"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_marginBottom="42dp"
-                android:layout_marginLeft="41dp"
-                android:text="Accept" />
+                android:gravity="center_horizontal" >
 
-            <Button
-                android:id="@+id/btnRadioPower"
-                android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/btnSunroofOpen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunroof Open" />
+
+                <Button
+                    android:id="@+id/btnSunroofClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunroof Close" />
+
+                <Button
+                    android:id="@+id/btnVolUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vol Up" />
+
+                <Button
+                    android:id="@+id/btnVolDown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vol Down" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnAccept"
-                android:layout_alignBottom="@+id/btnAccept"
-                android:layout_marginLeft="24dp"
-                android:layout_toRightOf="@+id/btnAccept"
-                android:text="Radio Power" />
+                android:layout_above="@+id/linearLayout1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_horizontal" >
 
-            <Button
-                android:id="@+id/btnVolUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnRadioPower"
-                android:layout_alignBottom="@+id/btnRadioPower"
-                android:layout_marginLeft="27dp"
-                android:layout_toRightOf="@+id/btnRadioPower"
-                android:text="Vol Up" />
+                <Button
+                    android:id="@+id/btnAccept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accept" />
 
-            <Button
-                android:id="@+id/btnVolDown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnVolUp"
-                android:layout_alignBottom="@+id/btnVolUp"
-                android:layout_marginLeft="31dp"
-                android:layout_toRightOf="@+id/btnVolUp"
-                android:text="Vol Down" />
+                <Button
+                    android:id="@+id/btnLock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lock" />
 
-            <Button
-                android:id="@+id/btnDriverSeatForward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnVolDown"
-                android:layout_alignBottom="@+id/btnVolDown"
-                android:layout_marginLeft="81dp"
-                android:layout_toRightOf="@+id/btnVolDown"
-                android:text="Driver Seat Forward" />
+                <Button
+                    android:id="@+id/btnUnlock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unlock" />
 
-            <Button
-                android:id="@+id/btnDriverSeatBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btnDriverSeatForward"
-                android:layout_alignBottom="@+id/btnDriverSeatForward"
-                android:layout_marginLeft="22dp"
-                android:layout_toRightOf="@+id/btnDriverSeatForward"
-                android:text="Driver Seat Back" />
+                <Button
+                    android:id="@+id/btnRadioPower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Radio Power" />
 
-            <Button
-                android:id="@+id/btnLock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/btnAccept"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="18dp"
-                android:text="Lock" />
+                <Button
+                    android:id="@+id/btnMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Radio Mode" />
 
+                <Button
+                    android:id="@+id/btnDriverSeatForward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Driver Seat Forward" />
+
+                <Button
+                    android:id="@+id/btnDriverSeatBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Driver Seat Back" />
+            </LinearLayout>
         </RelativeLayout>
 
     </LinearLayout>

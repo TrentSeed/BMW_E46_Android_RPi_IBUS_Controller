@@ -1,5 +1,7 @@
 package com.trentseed.bmw_rpi_ibus_controller;
 
+import java.text.Normalizer;
+
 /**
  * IBUS "packet" that is sent between BMW and Raspberry Pi
  */
@@ -43,6 +45,26 @@ public class IBUSPacket {
 		else if(device_id.equals("f0")) return "BMB Board Monitor Buttons";
 		else if(device_id.equals("ff")) return "Broadcast FF";
 		else return "Unknown";
+	}
+	
+	/**
+	 * Parses hex string and returns ASCII character representation
+	 * @param hex
+	 * @return
+	 * @see http://www.mkyong.com/java/how-to-convert-hex-to-ascii-in-java/
+	 */
+	public String getAsciiFromRaw(){	  
+		StringBuilder sb = new StringBuilder();
+		for( int i=0; i<raw.length()-1; i+=2 ){
+			String output = raw.substring(i, (i + 2));
+			int decimal = Integer.parseInt(output, 16);
+			sb.append((char)decimal);
+		}
+		String normalized = Normalizer.normalize(sb.toString(), Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+		normalized = normalized.replace("#E", "");  // extra data to remove
+		normalized = normalized.replaceAll("[,;]", "");  // extra data to remove
+		normalized = normalized.replaceAll("[a-z]", "");  // extra data to remove
+		return normalized.replace(" CAP", " CA");  // extra data to remove
 	}
 
 }

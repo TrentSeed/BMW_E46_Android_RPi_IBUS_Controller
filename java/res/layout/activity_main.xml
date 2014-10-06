@@ -54,6 +54,7 @@
                     android:textSize="45sp" />
 
             </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -91,7 +92,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
-                    android:paddingTop="10dp"
+                    android:paddingTop="40dp"
                     android:text="DISTEL DR\nLOS ALTOS, CA"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="30sp" />
@@ -114,12 +115,12 @@
                 android:layout_weight="1" >
 
                 <TextView
-                    android:id="@+id/tvBtnStatus"
+                    android:id="@+id/tvBtnMedia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Status"
+                    android:text="Media"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textSize="45sp" />
 

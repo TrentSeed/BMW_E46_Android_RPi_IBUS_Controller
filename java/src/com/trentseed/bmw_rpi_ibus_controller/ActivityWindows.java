@@ -98,4 +98,11 @@ public class ActivityWindows extends Activity {
 		});
 	}
 	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		BluetoothInterface.mActivity = this;
+		BluetoothInterface.checkConnection();
+	}
+	
 }

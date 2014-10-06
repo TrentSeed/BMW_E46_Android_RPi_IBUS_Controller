@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ActivityStatus extends Activity {
 	
 	// layout objects
 	private ImageView ivBack;
+	TextView tvStatus;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class ActivityStatus extends Activity {
 		
 		// get layout objects
 		ivBack = (ImageView) findViewById(R.id.ivBack);
+		tvStatus = (TextView) findViewById(R.id.tvStatus);
+		updateStatusText();
 		
 		// set click handlers
 		ivBack.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +35,22 @@ public class ActivityStatus extends Activity {
 				finish();
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		BluetoothInterface.mActivity = this;
+		BluetoothInterface.checkConnection();
+		updateStatusText();
+	}
+	
+	private void updateStatusText(){
+		if(BluetoothInterface.isConnected()){
+			tvStatus.setText("Connected to Raspberry Pi via Bluetooth");
+		}else{
+			tvStatus.setText("Not Connected");
+		}
 	}
 	
 }

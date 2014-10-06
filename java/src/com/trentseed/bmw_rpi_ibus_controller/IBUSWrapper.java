@@ -38,29 +38,52 @@ public class IBUSWrapper {
 	
 	// special packets
 	public static final String KEY_INSERTED = "4405bf7404028c";
-	public static final String KEY_REMOTE_LOCK = "0004bf7212db";
-	public static final String KEY_REMOTE_UNLOCK = "0004df0004bf";
+	public static final String KEY_REMOTE_LOCK = "3f05000c340103";
+	public static final String KEY_REMOTE_UNLOCK = "3f05000c030134";
+	public static final String RADIO_POLLING_CD_REQUEST = "6803180172";
+	public static final String RADIO_POLLING_CD_RESPONSE = "180468020076";
+	
+	// track GPS data toggle
+	public static boolean gpsIsCityToggle = true;
+	public static String gpsStreet = "STREET";
+	public static String gpsCity = "CITY";
 		
 	/**
 	 * Processes a received IBUSPacket (this is extracted from original BlueBusPacket)
-	 * BMW --(USB)--> RaspberryPi --(Bluetooth)--> Android
+	 * BMW --(IBUS USB)--> RaspberryPi --(Bluetooth)--> Android
 	 * @param command
 	 */
 	public static void processPacket(IBUSPacket ibPacket){
+		// add packet to local buffer (IBUS activity displays buffer)
+		int max_buffer = 50;
+		BluetoothInterface.mArrayListIBUSActivity.add(0, ibPacket);
+		if(BluetoothInterface.mArrayListIBUSActivity.size() > max_buffer){
+			BluetoothInterface.mArrayListIBUSActivity.remove(BluetoothInterface.mArrayListIBUSActivity.size()-1);
+		}
+		
 		// check for special packets
 		if(ibPacket.raw.equals(KEY_INSERTED)){
-			Log.d("BMW", "Waking android screen now...");
-			WakeLocker.acquire(BluetoothInterface.mActivity);
-			WakeLocker.release();
+			// special packet - key inserted
+			Log.d("BMW", "Key was inserted now...");
+			wakeScreen();
+		}else if(ibPacket.raw.equals(KEY_REMOTE_LOCK)){
+			// special packet - car locked
+			Log.d("BMW", "Car was locked now...");
+		}else if(ibPacket.raw.equals(KEY_REMOTE_UNLOCK)){
+			// special packet - car unlocked
+			Log.d("BMW", "Car was unlocked now...");
+			wakeScreen();
+		}else if(ibPacket.raw.equals(RADIO_POLLING_CD_REQUEST)){
+			// special packet - radio polling CD changer
+			Log.d("BMW", "Radio polling CD changer now...");
+			sendCDChangerPollResponse();
 		}
 		
 		// perform activity specific actions
 		if(BluetoothInterface.mActivity instanceof ActivityMain){
 			((ActivityMain) BluetoothInterface.mActivity).receivedIBUSPacket(ibPacket);
-			
 		}else if(BluetoothInterface.mActivity instanceof ActivityIBUS){
 			((ActivityIBUS) BluetoothInterface.mActivity).receivedIBUSPacket(ibPacket);
-			
 		}else if(BluetoothInterface.mActivity instanceof ActivityRadio){
 			
 		}else if(BluetoothInterface.mActivity instanceof ActivityStatus){
@@ -68,6 +91,15 @@ public class IBUSWrapper {
 		}else if(BluetoothInterface.mActivity instanceof ActivityWindows){
 			
 		}
+	}
+	
+	/**
+	 * Wakes the screen and shows the display.
+	 */
+	private static void wakeScreen(){
+		Log.d("BMW", "Waking android screen now...");
+		WakeLocker.acquire(BluetoothInterface.mActivity);
+		WakeLocker.release();
 	}
 	
 	/**
@@ -247,4 +279,48 @@ public class IBUSWrapper {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void unlockCar(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = "3F05000C030134";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing unlock car message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void toggleSunroof(boolean open){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		if(open) bbPacket.data = "3F05000C7E0149";
+		else bbPacket.data = "3F05000C7F0148";
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing toggle sunroof message...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void sendCDChangerPollResponse(){
+		BlueBusPacket bbPacket = new BlueBusPacket();
+		bbPacket.type = 1;
+		bbPacket.data = RADIO_POLLING_CD_RESPONSE;
+		try {
+			if(BluetoothInterface.isConnected()){
+				BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+				Log.d("BMW", "Writing radio polling CD response...");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

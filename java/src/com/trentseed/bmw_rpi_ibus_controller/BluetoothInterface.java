@@ -52,6 +52,9 @@ public class BluetoothInterface {
 			listenThread.start();
 			return true;
 		}catch(Exception e){
+			if(mActivity != null && mActivity.isFinishing() == false){
+				Toast.makeText(mActivity, "Unable To Connect via Bluetooth", Toast.LENGTH_LONG).show();
+			}
 			return false;
 		}
 	}
@@ -65,6 +68,17 @@ public class BluetoothInterface {
 			return true;
 		}else{
 			return false;
+		}
+	}
+	
+	/**
+	 * Checks Bluetooth connection, and connects if necessary.
+	 */
+	public static void checkConnection(){
+		// check connection bluetooth
+		if(BluetoothInterface.isConnected() == false){
+			BluetoothInterface.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+			BluetoothInterface.connectToRaspberryPi();
 		}
 	}
 	
