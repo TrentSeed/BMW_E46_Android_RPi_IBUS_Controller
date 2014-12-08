@@ -256,17 +256,18 @@ containing a value of this type.
     }
     public static final class id {
         public static final int action_error=0x7f090007;
-        public static final int action_settings=0x7f090015;
+        public static final int action_settings=0x7f090016;
         public static final int action_success=0x7f090009;
         public static final int all=0x7f090000;
         public static final int animation=0x7f09000a;
         public static final int bottom=0x7f090001;
-        public static final int btn_down=0x7f090013;
-        public static final int btn_up=0x7f090014;
+        public static final int btn_down=0x7f090014;
+        public static final int btn_up=0x7f090015;
         public static final int dismiss_overlay_button=0x7f09000d;
         public static final int dismiss_overlay_explain=0x7f09000c;
         public static final int error_message=0x7f090008;
         public static final int imageView1=0x7f090005;
+        public static final int imgBtnEmblem=0x7f090013;
         public static final int imgBtnLock=0x7f09000e;
         public static final int imgBtnUnlock=0x7f09000f;
         public static final int left=0x7f090002;

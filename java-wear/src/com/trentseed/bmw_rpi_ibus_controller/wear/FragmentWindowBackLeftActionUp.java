@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class FragmentWindowActionUp extends Fragment {
+public class FragmentWindowBackLeftActionUp extends Fragment {
     
 	ImageView imgBtnUp;
 	
@@ -21,15 +21,7 @@ public class FragmentWindowActionUp extends Fragment {
 			@Override
 			public void onClick(View v) {
 				try{
-					if(ActivityMain.parent_page_id == IBUSGridPagerAdapter.PAGE_DRIVER_LANDING){
-						IBUSWrapper.windowDriverFront(false);
-					}else if(ActivityMain.parent_page_id == IBUSGridPagerAdapter.PAGE_PASSENGER_LANDING){
-						IBUSWrapper.windowPassengerFront(false);
-					}else if(ActivityMain.parent_page_id == IBUSGridPagerAdapter.PAGE_REAR_LEFT_LANDING){
-						IBUSWrapper.windowDriverRear(false);
-					}else if(ActivityMain.parent_page_id == IBUSGridPagerAdapter.PAGE_REAR_RIGHT_LANDING){
-						IBUSWrapper.windowPassengerRear(false);
-					}
+					IBUSWrapper.windowDriverRear(false);
 				}catch (Exception e){
 					e.printStackTrace();
 				}

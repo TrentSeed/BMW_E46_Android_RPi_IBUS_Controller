@@ -11,6 +11,7 @@ public class FragmentWindowBackLeft extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+    	ActivityMain.parent_page_id = IBUSGridPagerAdapter.PAGE_REAR_LEFT_LANDING;
         return inflater.inflate(R.layout.window_back_left, container, false);
     }
 }

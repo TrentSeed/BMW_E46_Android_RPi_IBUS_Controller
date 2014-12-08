@@ -75,6 +75,7 @@ public class BluetoothInterface {
 	 * Checks Bluetooth connection, and connects if necessary.
 	 */
 	public static void checkConnection(){
+		Log.d("IBUS", "CHECKING BLUETOOTH CONNECTION... " + BluetoothInterface.isConnected());
 		// check connection bluetooth
 		if(BluetoothInterface.isConnected() == false){
 			BluetoothInterface.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

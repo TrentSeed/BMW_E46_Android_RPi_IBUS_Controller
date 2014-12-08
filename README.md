@@ -11,7 +11,7 @@ There are three main components of the solution:<br />
 
 ![Android_RPi_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_ibus_overview_v2.jpg)
 
-There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!
+There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!<br />
 **Android Wear Device** - Secondary device that provides quick interactions with the car<br />
 
 ![Android_WEAR_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_wear_ibus_overview.jpg)

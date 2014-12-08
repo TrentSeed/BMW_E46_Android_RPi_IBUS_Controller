@@ -72,30 +72,30 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
         	ActivityMain.parent_page_id = PAGE_DRIVER_LANDING;
         	newFrag = new FragmentWindowFrontLeft();
         }else if (page.page_id == PAGE_DRIVER_UP){
-        	newFrag = new FragmentWindowActionUp();
+        	newFrag = new FragmentWindowFrontLeftActionUp();
         }else if (page.page_id == PAGE_DRIVER_DOWN){
-        	newFrag = new FragmentWindowActionDown();
+        	newFrag = new FragmentWindowFrontLeftActionDown();
         }else if (page.page_id == PAGE_PASSENGER_LANDING){
         	ActivityMain.parent_page_id = PAGE_PASSENGER_LANDING;
         	newFrag = new FragmentWindowFrontRight();
         }else if (page.page_id == PAGE_PASSENGER_UP){
-        	newFrag = new FragmentWindowActionUp();
+        	newFrag = new FragmentWindowFrontRightActionUp();
         }else if (page.page_id == PAGE_PASSENGER_DOWN){
-        	newFrag = new FragmentWindowActionDown();
+        	newFrag = new FragmentWindowFrontRightActionDown();
         }else if (page.page_id == PAGE_REAR_LEFT_LANDING){
         	ActivityMain.parent_page_id = PAGE_REAR_LEFT_LANDING;
         	newFrag = new FragmentWindowBackLeft();
         }else if (page.page_id == PAGE_REAR_LEFT_UP){
-        	newFrag = new FragmentWindowActionUp();
+        	newFrag = new FragmentWindowBackLeftActionUp();
         }else if (page.page_id == PAGE_REAR_LEFT_DOWN){
-        	newFrag = new FragmentWindowActionDown();
+        	newFrag = new FragmentWindowBackLeftActionDown();
         }else if (page.page_id == PAGE_REAR_RIGHT_LANDING){
         	ActivityMain.parent_page_id = PAGE_REAR_RIGHT_LANDING;
         	newFrag = new FragmentWindowBackRight();
         }else if (page.page_id == PAGE_REAR_RIGHT_UP){
-        	newFrag = new FragmentWindowActionUp();
+        	newFrag = new FragmentWindowBackRightActionUp();
         }else if (page.page_id == PAGE_REAR_RIGHT_DOWN){
-        	newFrag = new FragmentWindowActionDown();
+        	newFrag = new FragmentWindowBackRightActionDown();
         }else if (page.page_id == PAGE_LOCKS_LANDING){
         	ActivityMain.parent_page_id = PAGE_LOCKS_LANDING;
         	newFrag = new FragmentKeys();

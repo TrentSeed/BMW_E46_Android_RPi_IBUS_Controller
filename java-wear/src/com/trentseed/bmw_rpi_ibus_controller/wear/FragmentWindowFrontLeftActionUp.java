@@ -7,24 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class FragmentWelcome extends Fragment {
-
-	ImageView imgBtnClose;
+public class FragmentWindowFrontLeftActionUp extends Fragment {
+    
+	ImageView imgBtnUp;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-    	// perform check if connected to bmw car (debug purposes)
-		BluetoothInterface.checkConnection();
-    	
         // Inflate the layout for this fragment
-		View rootView = inflater.inflate(R.layout.welcome, container, false);
-		imgBtnClose = (ImageView) rootView.findViewById(R.id.imgBtnEmblem);
-		imgBtnClose.setOnClickListener(new View.OnClickListener() {
+    	View rootView = inflater.inflate(R.layout.window_action_up, container, false);
+    	imgBtnUp = (ImageView) rootView.findViewById(R.id.btn_up);
+    	imgBtnUp.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BluetoothInterface.disconnect();
-				getActivity().finish();
+				try{
+					IBUSWrapper.windowDriverFront(false);
+				}catch (Exception e){
+					e.printStackTrace();
+				}
 			}
 		});
         return rootView;

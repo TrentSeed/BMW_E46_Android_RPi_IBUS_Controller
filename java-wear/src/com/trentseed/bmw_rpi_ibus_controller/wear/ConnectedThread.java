@@ -23,7 +23,7 @@ class ConnectedThread extends Thread {
                 bytes = BluetoothInterface.mBluetoothInputStream.read(buffer);
                 if(bytes > 0){
                 	// read data, inflate to BlueBusPacket, extract IBUSPacket
-                	Log.d("BMW", "Data In = " + new String(buffer).trim());
+                	//Log.d("BMW", "Data In = " + new String(buffer).trim());
                 	/*
                 	String strBuffer = new String(buffer).trim();
                 	if(isJSONValid(strBuffer)){
