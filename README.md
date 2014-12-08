@@ -1,7 +1,7 @@
 BMW E46 - Android, Raspberry Pi, IBUS Controller
 =====
 
-IBUS interface for my E46 BMW written in Python & Java. This is to be used with the IBUS USB interface which can be acquired from [Reslers.de](http://www.reslers.de/IBUS/), or from Amazon/eBay.
+IBUS interface for my E46 BMW written in Python & Java. This is to be used with the IBUS USB interface which can be acquired from [Reslers.de](http://www.reslers.de/IBUS/), or from Amazon/eBay.w
 
 ## Overview
 There are three main components of the solution:<br />
@@ -10,6 +10,11 @@ There are three main components of the solution:<br />
 **IBUS USB Adapter** - USB adapter that provides USB/UART interface from physical wire in car<br />
 
 ![Android_RPi_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_ibus_overview_v2.jpg)
+
+There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!
+**Android Wear Device** - Secondary device that provides quick interactions with the car<br />
+
+![Android_WEAR_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_wear_ibus_overview.jpg)
 
 ## Pre-Requisites
 ### 1. Car Installation
@@ -37,10 +42,16 @@ There are three main components of the solution:<br />
 * Copy `python/` contents to RPi
 * Update `python/android_service/bt.py` with RPi Bluetooth address
 
-### 3. Android
-* Update `BluetoothInterface.remoteBluetoothAddress` with RPi Bluetooth address
-* Build Android project `android/`
+### 3. Android Mobile / Tablet
+* Update `BluetoothInterface.remoteBluetoothAddress` of 'java-android' with RPi Bluetooth address
+* Build Android project `java-android/`
 * Install `android/bin/BMW_RPi_IBUS_Controller.apk`
+
+### 4. Android Wear (Optional)
+* Update `BluetoothInterface.remoteBluetoothAddress` of 'java-wear' with RPi Bluetooth address
+* 
+Build Android project `java-wear/`
+* Install `android/bin/IBUSWear.apk.apk`
 
 ## How To Get Started
 * Install the prerequisites above
