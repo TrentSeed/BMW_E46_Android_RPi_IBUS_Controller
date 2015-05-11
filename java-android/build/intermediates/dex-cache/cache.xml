@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\Trent\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Users\Trent\Mercurial\java-android\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-4ab940d3059679eb90beee2038d86f320c7594b7.jar" />
+    </item>
+    <item
+        jar="C:\Users\Trent\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="C:\Users\Trent\Mercurial\java-android\app\build\intermediates\pre-dexed\debug\gson-2.2.4-2bd227f02831c1300bdc314fea573a53f15362e4.jar" />
+    </item>
+
+</items>
