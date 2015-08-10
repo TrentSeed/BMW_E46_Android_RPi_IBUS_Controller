@@ -12,9 +12,9 @@ import android.util.Log;
 public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
 
 	/* PAGE IDS */
-	public static int PAGE_NONE = 0;
 	public static int PAGE_WELCOME = 10;
 	public static int PAGE_ABOUT = 11;
+    public static int PAGE_EXIT = 12;
 	public static int PAGE_DRIVER_LANDING = 20;
 	public static int PAGE_DRIVER_UP = 21;
 	public static int PAGE_DRIVER_DOWN = 22;
@@ -30,6 +30,15 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
 	public static int PAGE_LOCKS_LANDING = 60;
 	public static int PAGE_LOCKS_LOCK = 61;
 	public static int PAGE_LOCKS_UNLOCK = 62;
+    public static int PAGE_VOLUME_LANDING = 70;
+    public static int PAGE_VOLUME_UP = 71;
+    public static int PAGE_VOLUME_DOWN = 72;
+    public static int PAGE_SUNROOF_LANDING = 80;
+    public static int PAGE_SUNROOF_OPEN = 81;
+    public static int PAGE_SUNROOF_CLOSE = 82;
+    public static int PAGE_DRIVER_SEAT_LANDING = 90;
+    public static int PAGE_DRIVER_SEAT_FORWARD = 91;
+    public static int PAGE_DRIVER_SEAT_BACK = 92;
 	
     private final Context mContext;
 
@@ -50,12 +59,15 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
 
     // Create a static set of pages in a 2D array
     private final Page[][] PAGES = {
-    		{ new Page(PAGE_WELCOME), new Page(PAGE_ABOUT) },
-    		{ new Page(PAGE_DRIVER_LANDING), new Page(PAGE_DRIVER_UP), new Page(PAGE_DRIVER_DOWN) },
+    		{ new Page(PAGE_WELCOME), new Page(PAGE_EXIT), new Page(PAGE_ABOUT) },
+            { new Page(PAGE_LOCKS_LANDING), new Page(PAGE_LOCKS_LOCK), new Page(PAGE_LOCKS_UNLOCK) },
+            { new Page(PAGE_VOLUME_LANDING), new Page(PAGE_VOLUME_UP), new Page(PAGE_VOLUME_DOWN) },
+            { new Page(PAGE_SUNROOF_LANDING), new Page(PAGE_SUNROOF_OPEN), new Page(PAGE_SUNROOF_CLOSE) },
+            { new Page(PAGE_DRIVER_SEAT_LANDING), new Page(PAGE_DRIVER_SEAT_FORWARD), new Page(PAGE_DRIVER_SEAT_BACK) },
+            { new Page(PAGE_DRIVER_LANDING), new Page(PAGE_DRIVER_UP), new Page(PAGE_DRIVER_DOWN) },
     		{ new Page(PAGE_PASSENGER_LANDING), new Page(PAGE_PASSENGER_UP), new Page(PAGE_PASSENGER_DOWN) },
     		{ new Page(PAGE_REAR_LEFT_LANDING), new Page(PAGE_REAR_LEFT_UP), new Page(PAGE_REAR_LEFT_DOWN) },
-    		{ new Page(PAGE_REAR_RIGHT_LANDING), new Page(PAGE_REAR_RIGHT_UP), new Page(PAGE_REAR_RIGHT_DOWN) },
-    		{ new Page(PAGE_LOCKS_LANDING), new Page(PAGE_LOCKS_LOCK), new Page(PAGE_LOCKS_UNLOCK) }
+    		{ new Page(PAGE_REAR_RIGHT_LANDING), new Page(PAGE_REAR_RIGHT_UP), new Page(PAGE_REAR_RIGHT_DOWN) }
     };
     
     // Obtain the UI fragment at the specified position
@@ -70,6 +82,8 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
         	newFrag = new FragmentWelcome();
         }else if (page.page_id == PAGE_ABOUT){
         	newFrag = new FragmentAbout();
+        }else if (page.page_id == PAGE_EXIT){
+            newFrag = new FragmentExit();
         }else if (page.page_id == PAGE_DRIVER_LANDING){
         	ActivityMain.parent_page_id = PAGE_DRIVER_LANDING;
         	newFrag = new FragmentWindowFrontLeft();
@@ -105,6 +119,27 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
         	newFrag = new FragmentKeysLock();
         }else if (page.page_id == PAGE_LOCKS_UNLOCK){
         	newFrag = new FragmentKeysUnlock();
+        }else if (page.page_id == PAGE_VOLUME_LANDING){
+            ActivityMain.parent_page_id = PAGE_VOLUME_LANDING;
+            newFrag = new FragmentVolume();
+        }else if (page.page_id == PAGE_VOLUME_UP){
+            newFrag = new FragmentVolumeUp();
+        }else if (page.page_id == PAGE_VOLUME_DOWN){
+            newFrag = new FragmentVolumeDown();
+        }else if (page.page_id == PAGE_SUNROOF_LANDING){
+            ActivityMain.parent_page_id = PAGE_SUNROOF_LANDING;
+            newFrag = new FragmentSunroof();
+        }else if (page.page_id == PAGE_SUNROOF_OPEN){
+            newFrag = new FragmentSunroofOpen();
+        }else if (page.page_id == PAGE_SUNROOF_CLOSE){
+            newFrag = new FragmentSunroofClose();
+        }else if (page.page_id == PAGE_DRIVER_SEAT_LANDING){
+            ActivityMain.parent_page_id = PAGE_DRIVER_SEAT_LANDING;
+            newFrag = new FragmentDriverSeat();
+        }else if (page.page_id == PAGE_DRIVER_SEAT_FORWARD){
+            newFrag = new FragmentDriverSeatForward();
+        }else if (page.page_id == PAGE_DRIVER_SEAT_BACK){
+            newFrag = new FragmentDriverSeatBack();
         }else{
         	ActivityMain.parent_page_id = PAGE_WELCOME;
         	newFrag = new FragmentWelcome();
