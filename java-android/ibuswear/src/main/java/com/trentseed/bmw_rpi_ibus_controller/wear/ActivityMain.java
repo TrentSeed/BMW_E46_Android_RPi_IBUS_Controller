@@ -6,6 +6,7 @@ import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WatchViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 
 public class ActivityMain extends Activity {
@@ -33,9 +34,15 @@ public class ActivityMain extends Activity {
 		        pager.setAdapter(new IBUSGridPagerAdapter(ActivityMain.this, getFragmentManager()));
 			}
 		});
-		
-		// connect to bmw car (via raspberry pi)
-		//BluetoothInterface.checkConnection();
+    }
+
+    /**
+     * Display toast message for Toast.LENGTH_SHORT period. Uses the fragments
+     * activity for context.
+     * @param message
+     */
+    public void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
     
 }

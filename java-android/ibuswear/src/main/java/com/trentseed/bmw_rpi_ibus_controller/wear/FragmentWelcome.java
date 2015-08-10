@@ -28,6 +28,10 @@ public class FragmentWelcome extends Fragment {
 				startReconnect();
 			}
 		});
+
+        // start initial connect (if disconnected)
+        if (!BluetoothInterface.isConnected()) startReconnect();
+
         return rootView;
     }
 
@@ -51,6 +55,8 @@ public class FragmentWelcome extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
+            ((ActivityMain)FragmentWelcome.this.getActivity())
+                    .showToast("Connected: " + BluetoothInterface.isConnected());
             pbConnectionLoader.setVisibility(View.GONE);
         }
 

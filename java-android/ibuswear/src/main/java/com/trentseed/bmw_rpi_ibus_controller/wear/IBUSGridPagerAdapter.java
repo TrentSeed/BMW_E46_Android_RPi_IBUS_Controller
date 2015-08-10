@@ -14,7 +14,8 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
 	/* PAGE IDS */
 	public static int PAGE_WELCOME = 10;
 	public static int PAGE_ABOUT = 11;
-    public static int PAGE_EXIT = 12;
+    public static int PAGE_VOICE_COMMAND = 12;
+    public static int PAGE_EXIT = 13;
 	public static int PAGE_DRIVER_LANDING = 20;
 	public static int PAGE_DRIVER_UP = 21;
 	public static int PAGE_DRIVER_DOWN = 22;
@@ -59,7 +60,7 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
 
     // Create a static set of pages in a 2D array
     private final Page[][] PAGES = {
-    		{ new Page(PAGE_WELCOME), new Page(PAGE_EXIT), new Page(PAGE_ABOUT) },
+    		{ new Page(PAGE_WELCOME), new Page(PAGE_VOICE_COMMAND), new Page(PAGE_EXIT), new Page(PAGE_ABOUT) },
             { new Page(PAGE_LOCKS_LANDING), new Page(PAGE_LOCKS_LOCK), new Page(PAGE_LOCKS_UNLOCK) },
             { new Page(PAGE_VOLUME_LANDING), new Page(PAGE_VOLUME_UP), new Page(PAGE_VOLUME_DOWN) },
             { new Page(PAGE_SUNROOF_LANDING), new Page(PAGE_SUNROOF_OPEN), new Page(PAGE_SUNROOF_CLOSE) },
@@ -82,6 +83,8 @@ public class IBUSGridPagerAdapter extends FragmentGridPagerAdapter {
         	newFrag = new FragmentWelcome();
         }else if (page.page_id == PAGE_ABOUT){
         	newFrag = new FragmentAbout();
+        }else if (page.page_id == PAGE_VOICE_COMMAND){
+            newFrag = new FragmentVoiceCommand();
         }else if (page.page_id == PAGE_EXIT){
             newFrag = new FragmentExit();
         }else if (page.page_id == PAGE_DRIVER_LANDING){
