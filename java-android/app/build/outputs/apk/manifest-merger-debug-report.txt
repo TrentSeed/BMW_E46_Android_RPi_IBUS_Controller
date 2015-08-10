@@ -1,6 +1,8 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
@@ -11,8 +13,6 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:4:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
 	android:targetSdkVersion
@@ -43,10 +43,10 @@ ADDED from AndroidManifest.xml:14:5
 		ADDED from AndroidManifest.xml:15:9
 	android:icon
 		ADDED from AndroidManifest.xml:16:9
-	android:description
-		ADDED from AndroidManifest.xml:18:41
 	android:theme
 		ADDED from AndroidManifest.xml:18:9
+	android:description
+		ADDED from AndroidManifest.xml:18:41
 activity#com.trentseed.bmw_rpi_ibus_controller.ActivityMain
 ADDED from AndroidManifest.xml:19:9
 	android:screenOrientation
