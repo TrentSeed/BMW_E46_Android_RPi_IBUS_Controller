@@ -5,14 +5,13 @@ from packet import IBUSPacket
 import threading
 
 
-class IBUSService():
+class IBUSService(object):
 
     # configuration
     baudrate = 9600
     handle = None
     parity = serial.PARITY_EVEN
-    #port = 6  # ThinkPad T410
-    port = '/dev/ttyUSB0'  # Raspberry Pi
+    port = '/dev/ttyUSB0'
     timeout = 1
     thread = None
 
@@ -24,7 +23,6 @@ class IBUSService():
         self.thread = threading.Thread(target=self.start)
         self.thread.daemon = True
         self.thread.start()
-        return
 
     def start(self):
         """
@@ -42,11 +40,11 @@ class IBUSService():
         try:
             print "Destroying IBUS service..."
             self.handle.close()
-            self.handle = None
-            self.thread = None
-        except TypeError:
-            self.handle = None
-            self.thread = None
+        except (TypeError, Exception):
+            pass
+
+        self.handle = None
+        self.thread = None
 
     def process_bus_dump(self, dump, index=0):
         """
@@ -62,6 +60,7 @@ class IBUSService():
         hex_dump = dump.encode('hex')
         if globals.debug:
             print "Hex Dump: " + hex_dump
+
         while index < len(hex_dump):
             try:
                 # construct packet while reading
@@ -107,10 +106,6 @@ class IBUSService():
                 if packet.is_valid():
                     packets.append(packet)
 
-                # check for special packets
-                #if current_packet == "5004ff3b40d0":  # 'Mode' from Steering Wheel Controls
-                    #self.write_to_ibus("f004684823f7" + "f0046848a377" + "680b3ba562014120464d412095")
-
             except Exception as e:
                 print "Error processing bus dump: " + e.message
 
@@ -120,12 +115,10 @@ class IBUSService():
     @staticmethod
     def process_packets(packets):
         """
-        Process packets [] and determine message to send to Android
+        Process packets [] and send to Android (if service is active)
         """
-        # check if android service ready
         if globals.android_service is not None:
             try:
-                # send packets to android
                 globals.android_service.send_packets_to_android(packets)
             except Exception as e:
                 print "Error: " + e.message + "\nFailed to send packets to android"

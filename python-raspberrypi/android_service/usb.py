@@ -12,7 +12,7 @@ Open Issues:
 """
 
 
-class AndroidUSBService():
+class AndroidUSBService(object):
 
     # configuration (HTC One X)
     accessory_vendor_id = 0x04E8  # (HTC One X - 0x0BB4)  # (Galaxy S4 - 0x04E8)
@@ -146,7 +146,6 @@ class AndroidUSBService():
             usb.util.endpoint_direction(e.bEndpointAddress) == usb.util.ENDPOINT_IN
         )
         #self.handle.detach_kernel_driver(self.interface)
-
 
     def start_accessory_tasks(self):
         """
