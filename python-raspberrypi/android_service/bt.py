@@ -5,6 +5,7 @@ from ibus_service.packet import IBUSPacket
 import json
 import time
 import threading
+import subprocess
 
 
 class AndroidBluetoothService(object):
@@ -62,6 +63,7 @@ class AndroidBluetoothService(object):
             print "Destroying BLUETOOTH service..."
             self.client_sock.close()
             self.server_sock.close()
+            self.hci0_reset()
         except Exception:
             pass
 
@@ -69,6 +71,16 @@ class AndroidBluetoothService(object):
         self.client_sock = None
         self.server_sock = None
         self.thread = None
+
+    @staticmethod
+    def hci0_reset():
+        """resets the bluetooth hci0 device via hciconfig"""
+        try:
+            print "Performing hci0 down/up..."
+            subprocess.Popen("sudo hciconfig hci0 down", shell=True).communicate()
+            subprocess.Popen("sudo hciconfig hci0 up", shell=True).communicate()
+        except Exception as e:
+            print "Failed to restart hci0 - " + str(e)
 
     def send_packets_to_android(self, ibus_packets):
         """
@@ -127,7 +139,7 @@ class AndroidBluetoothService(object):
         """
         try:
             packet = json.loads(data)
-            print "Received BlueBusPacket from Android [" + str(len(packet['data'])) + "]"
+            print "Received IBUSPacket via BT [" + str(packet['data']) + "]"
             globals.ibus_service.write_to_ibus(packet.data.decode('hex'))
         except Exception as e:
             print "Error: " + e.message

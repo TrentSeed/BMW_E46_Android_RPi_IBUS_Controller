@@ -128,6 +128,54 @@ public class IBUSWrapper {
 			e.printStackTrace();
 		}
 	}
+
+    public static void turnInteriorLightsOff(){
+        BlueBusPacket bbPacket = new BlueBusPacket();
+        bbPacket.type = 1;
+        bbPacket.data = "3f05000c010136";
+        try {
+            if(BluetoothInterface.isConnected()){
+                BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+                Log.d("BMW", "Writing turn off interior lights message...");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void turnInteriorLightsOn(){
+        BlueBusPacket bbPacket = new BlueBusPacket();
+        bbPacket.type = 1;
+        bbPacket.data = "3f05000c600157";
+        try {
+            if(BluetoothInterface.isConnected()){
+                BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+                Log.d("BMW", "Writing turn on interior lights message...");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void openTrunk(){
+        BlueBusPacket bbPacket = new BlueBusPacket();
+        bbPacket.type = 1;
+        bbPacket.data = "3f05000c020135";
+        try {
+            if(BluetoothInterface.isConnected()){
+                BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+                Log.d("BMW", "Writing open trunk message...");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 	
 	public static void pressAccept(){
 		BlueBusPacket bbPacket = new BlueBusPacket();
@@ -144,6 +192,22 @@ public class IBUSWrapper {
 			e.printStackTrace();
 		}
 	}
+
+    public static void toggleHazards(){
+        BlueBusPacket bbPacket = new BlueBusPacket();
+        bbPacket.type = 1;
+        bbPacket.data = "0004bf7602cf";
+        try {
+            if(BluetoothInterface.isConnected()){
+                BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+                Log.d("BMW", "Writing toggle hazards message...");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 	
 	public static void toggleRadioPower(){
 		BlueBusPacket bbPacket = new BlueBusPacket();
@@ -245,7 +309,24 @@ public class IBUSWrapper {
 			e.printStackTrace();
 		}
 	}
-	
+
+    public static void moveDriverSeatUpperPortion(boolean forward){
+        BlueBusPacket bbPacket = new BlueBusPacket();
+        bbPacket.type = 1;
+        if(forward) bbPacket.data = "3f06720c01400006";
+        else bbPacket.data = "3f06720c018000c6";
+        try {
+            if(BluetoothInterface.isConnected()){
+                BluetoothInterface.mBluetoothOutputStream.write(new Gson().toJson(bbPacket).getBytes());
+                Log.d("BMW", "Writing upper driver seat message...");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 	public static void lockCar(){
 		BlueBusPacket bbPacket = new BlueBusPacket();
 		bbPacket.type = 1;
