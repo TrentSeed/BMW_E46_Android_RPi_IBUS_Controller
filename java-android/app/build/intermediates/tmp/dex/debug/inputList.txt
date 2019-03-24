@@ -1,3 +1,0 @@
-/Users/trentseed/BMW_E46_Android_RPi_IBUS_Controller/java-android/app/build/intermediates/classes/debug
-/Users/trentseed/BMW_E46_Android_RPi_IBUS_Controller/java-android/app/build/intermediates/pre-dexed/debug/gson-2.2.4-76d7896ae4e6c6671f6966d6a68473b3ffaeac99.jar
-/Users/trentseed/BMW_E46_Android_RPi_IBUS_Controller/java-android/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-079d785069262337301e1e34cf34796cde25bb36.jar

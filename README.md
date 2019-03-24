@@ -1,20 +1,24 @@
-BMW E46 - Android, Raspberry Pi, IBUS Controller
-=====
+<p align="center"><img src="https://s3-us-west-1.amazonaws.com/connected-car-static-files/connected_car_logo_padded.png" width="70%" style=""></p>
 
-IBUS interface for my E46 BMW written in Python & Java. This is to be used with the IBUS USB interface which can be acquired from [Reslers.de](http://www.reslers.de/IBUS/), or from Amazon/eBay.w
+"Appify" your E46 BMW with a Raspberry Pi and your smartphone! This repository contains the IBUS controller, as well as the Android application which supports mobile devices and wearables. This is to be used with the IBUS USB interface which can be acquired from [Reslers.de](http://www.reslers.de/IBUS/), or from Amazon/eBay.
 
-## Overview
-There are three main components of the solution:<br />
-**Android Tablet** - Primary front-end device for interacting with the car<br />
-**Raspberry Pi** - Mini-PC that handles communication between the IBUS adapter and the Android device<br />
-**IBUS USB Adapter** - USB adapter that provides USB/UART interface from physical wire in car<br />
+Blog Series on Medium:
+- [Connecting a BMW to the Internet: Part One](https://medium.com/design-and-tech-co/connecting-a-bmw-to-the-internet-part-one-fbe18a54121d)
+- [Connecting a BMW to the Internet: Part Two](https://medium.com/@trentseed/connecting-a-bmw-to-the-internet-part-two-1ee2ea44d4a2)
 
-![Android_RPi_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_ibus_overview_v2.jpg)
+## Overview 
 
-There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!<br />
-**Android Wear Device** - Secondary device that provides quick interactions with the car<br />
+There are three main components of the solution:
+**Android Tablet** - Primary front-end device for interacting with the car
+**Raspberry Pi** - Mini-PC that handles communication between the IBUS adapter and the Android device
+**IBUS USB Adapter** - USB adapter that provides USB/UART interface from physical wire in car
 
-![Android_WEAR_IBUS_Overview](http://trentseed.com/img/projects/bmw_raspberrypi_android_wear_ibus_overview.jpg)
+![Android_RPi_IBUS_Overview](https://s3-us-west-1.amazonaws.com/connected-car-static-files/connected_car_overview.jpg)
+
+There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!
+**Android Wear Device** - Secondary device that provides quick interactions with the car
+
+![Android_WEAR_IBUS_Overview](https://s3-us-west-1.amazonaws.com/connected-car-static-files/Android_Wear_Connected_BMW_App_UI.jpg)
 
 ## Pre-Requisites
 ### 1. Car Installation
@@ -44,13 +48,12 @@ There is also an Android Wear (4.4W) component that allows you to control your v
 
 ### 3. Android Mobile / Tablet
 * Update `BluetoothInterface.remoteBluetoothAddress` of 'java-android' with RPi Bluetooth address
-* Build Android project `java-android/`
+* Build Android project `java-android/` here
 * Install `android/bin/BMW_RPi_IBUS_Controller.apk`
 
 ### 4. Android Wear (Optional)
 * Update `BluetoothInterface.remoteBluetoothAddress` of 'java-wear' with RPi Bluetooth address
-* 
-Build Android project `java-wear/`
+* Build Android project `java-wear/` here
 * Install `android/bin/IBUSWear.apk.apk`
 
 ## How To Get Started

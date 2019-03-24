@@ -1,3 +1,0 @@
-pyserial==3.0.1
-pybluez==0.22
-paver
