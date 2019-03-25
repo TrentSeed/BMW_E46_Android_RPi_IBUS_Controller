@@ -1,1 +1,1 @@
-include ':app', ':ibuswear'
+include ':app', ':ibuswear', ':common'

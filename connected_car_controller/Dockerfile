@@ -3,7 +3,8 @@ FROM python:3.7.2-stretch
 MAINTAINER Trent Seed <hi@trentseed.com>
 
 RUN apt-get -y update
-RUN apt-get -y install libbluetooth-dev
+
+RUN apt-get -y install build-essential bluez bluez-tools libbluetooth-dev
 
 WORKDIR /opt/car-controller
 

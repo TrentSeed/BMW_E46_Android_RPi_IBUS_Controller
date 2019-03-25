@@ -23,5 +23,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.android.support:wearable:2.4.0'
     compileOnly 'com.google.android.wearable:wearable:2.4.0'
+    implementation project(':common')
 }
 

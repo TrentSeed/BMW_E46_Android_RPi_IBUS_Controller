@@ -8,18 +8,20 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
+
 public class ActivityWindows extends Activity {
 	
-	// layout objects
-	private ImageView ivBack;
-	private Button btnDriverFrontUp;
-	private Button btnDriverFrontDown;
-	private Button btnDriverRearUp;
-	private Button btnDriverRearDown;
-	private Button btnPassengerFrontUp;
-	private Button btnPassengerFrontDown;
-	private Button btnPassengerRearUp;
-	private Button btnPassengerRearDown;
+	ImageView ivBack;
+	Button btnDriverFrontUp;
+	Button btnDriverFrontDown;
+	Button btnDriverRearUp;
+	Button btnDriverRearDown;
+	Button btnPassengerFrontUp;
+	Button btnPassengerFrontDown;
+	Button btnPassengerRearUp;
+	Button btnPassengerRearDown;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +33,15 @@ public class ActivityWindows extends Activity {
 		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		btnDriverFrontUp = (Button) findViewById(R.id.btnDriverFrontUp);
-		btnDriverFrontDown = (Button) findViewById(R.id.btnDriverFrontDown);
-		btnDriverRearUp = (Button) findViewById(R.id.btnDriverRearUp);
-		btnDriverRearDown = (Button) findViewById(R.id.btnDriverRearDown);
-		btnPassengerFrontUp = (Button) findViewById(R.id.btnPassengerFrontUp);
-		btnPassengerFrontDown = (Button) findViewById(R.id.btnPassengerFrontDown);
-		btnPassengerRearUp = (Button) findViewById(R.id.btnPassengerRearUp);
-		btnPassengerRearDown = (Button) findViewById(R.id.btnPassengerRearDown);
+		ivBack = findViewById(R.id.ivBack);
+		btnDriverFrontUp = findViewById(R.id.btnDriverFrontUp);
+		btnDriverFrontDown = findViewById(R.id.btnDriverFrontDown);
+		btnDriverRearUp = findViewById(R.id.btnDriverRearUp);
+		btnDriverRearDown = findViewById(R.id.btnDriverRearDown);
+		btnPassengerFrontUp = findViewById(R.id.btnPassengerFrontUp);
+		btnPassengerFrontDown = findViewById(R.id.btnPassengerFrontDown);
+		btnPassengerRearUp = findViewById(R.id.btnPassengerRearUp);
+		btnPassengerRearDown = findViewById(R.id.btnPassengerRearDown);
 		
 		// set click handlers
 		ivBack.setOnClickListener(new View.OnClickListener() {

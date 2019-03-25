@@ -8,21 +8,23 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
+
 public class ActivityRadio extends Activity {
 
-	// layout objects
-	private ImageView ivBack;
-	private Button btnAccept;
-	private Button btnVolUp;
-	private Button btnVolDown;
-	private Button btnRadioPower;
-	private Button btnDriverSeatForward;
-	private Button btnDriverSeatBack;
-	private Button btnSunroofOpen;
-	private Button btnSunroofClose;
-	private Button btnLock;
-	private Button btnUnlock;
-	private Button btnMode;
+	ImageView ivBack;
+	Button btnAccept;
+	Button btnVolUp;
+	Button btnVolDown;
+	Button btnRadioPower;
+	Button btnDriverSeatForward;
+	Button btnDriverSeatBack;
+	Button btnSunroofOpen;
+	Button btnSunroofClose;
+	Button btnLock;
+	Button btnUnlock;
+	Button btnMode;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +36,18 @@ public class ActivityRadio extends Activity {
 		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		btnAccept = (Button) findViewById(R.id.btnAccept);
-		btnVolUp = (Button) findViewById(R.id.btnVolUp);
-		btnVolDown = (Button) findViewById(R.id.btnVolDown);
-		btnRadioPower = (Button) findViewById(R.id.btnRadioPower);
-		btnDriverSeatForward = (Button) findViewById(R.id.btnDriverSeatForward);
-		btnDriverSeatBack = (Button) findViewById(R.id.btnDriverSeatBack);
-		btnSunroofOpen = (Button) findViewById(R.id.btnSunroofOpen);
-		btnSunroofClose = (Button) findViewById(R.id.btnSunroofClose);
-		btnLock = (Button) findViewById(R.id.btnLock);
-		btnUnlock = (Button) findViewById(R.id.btnUnlock);
-		btnMode = (Button) findViewById(R.id.btnMode);
+		ivBack = findViewById(R.id.ivBack);
+		btnAccept = findViewById(R.id.btnAccept);
+		btnVolUp = findViewById(R.id.btnVolUp);
+		btnVolDown = findViewById(R.id.btnVolDown);
+		btnRadioPower = findViewById(R.id.btnRadioPower);
+		btnDriverSeatForward = findViewById(R.id.btnDriverSeatForward);
+		btnDriverSeatBack = findViewById(R.id.btnDriverSeatBack);
+		btnSunroofOpen = findViewById(R.id.btnSunroofOpen);
+		btnSunroofClose = findViewById(R.id.btnSunroofClose);
+		btnLock = findViewById(R.id.btnLock);
+		btnUnlock = findViewById(R.id.btnUnlock);
+		btnMode = findViewById(R.id.btnMode);
 		
 		// set click handlers
 		ivBack.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
+
 public class FragmentWindowFrontLeftActionUp extends Fragment {
     
 	ImageView imgBtnUp;
@@ -16,7 +18,7 @@ public class FragmentWindowFrontLeftActionUp extends Fragment {
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
     	View rootView = inflater.inflate(R.layout.window_action_up, container, false);
-    	imgBtnUp = (ImageView) rootView.findViewById(R.id.btn_up);
+    	imgBtnUp = rootView.findViewById(R.id.btn_up);
     	imgBtnUp.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

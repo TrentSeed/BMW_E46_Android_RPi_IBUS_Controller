@@ -1,1 +1,0 @@
-# TODO - pending structure formalization

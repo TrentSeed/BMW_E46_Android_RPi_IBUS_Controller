@@ -8,10 +8,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+
 public class ActivityStatus extends Activity {
 	
-	// layout objects
-	private ImageView ivBack;
+	ImageView ivBack;
 	TextView tvStatus;
 	
 	@Override
@@ -24,8 +25,8 @@ public class ActivityStatus extends Activity {
 		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		tvStatus = (TextView) findViewById(R.id.tvStatus);
+		ivBack = findViewById(R.id.ivBack);
+		tvStatus = findViewById(R.id.tvStatus);
 		updateStatusText();
 		
 		// set click handlers

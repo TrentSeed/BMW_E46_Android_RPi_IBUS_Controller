@@ -7,7 +7,7 @@ Reference: https://en.wikipedia.org/wiki/BMW_3_Series_(E46)
 """
 import logging
 
-from controllers.bmw.base import BMWController
+from controllers.base import BaseController
 
 from interfaces.ibus import IBUSInterface
 from interfaces.bt import BluetoothInterface
@@ -16,7 +16,7 @@ from interfaces.bt import BluetoothInterface
 LOGGER = logging.getLogger(__name__)
 
 
-class E46Controller(BMWController):
+class E46Controller(BaseController):
     """Controller definition for BMW E46 Vehicles"""
 
     __controller_name__ = 'bmw-e46'

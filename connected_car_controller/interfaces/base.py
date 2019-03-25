@@ -3,7 +3,7 @@ The interfaces.base module contains logic common to all BaseInterface implementa
 """
 import logging
 import os
-from configparser import SafeConfigParser
+from configparser import ConfigParser
 
 
 LOGGER = logging.getLogger(__name__)
@@ -48,7 +48,7 @@ class BaseInterface(object):
         path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), '..', 'etc', 'config.ini'
         )
-        parser = SafeConfigParser()
+        parser = ConfigParser()  # TODO: verify works; was SafeConfigParser
         parser.read(path)
         section = 'interfaces.{}'.format(self.__interface_name__)
 

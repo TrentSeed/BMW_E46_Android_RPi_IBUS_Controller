@@ -11,9 +11,6 @@ public class FragmentAbout extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
     	
-    	// perform check if connected to bmw car (debug purposes)
-		//BluetoothInterface.checkConnection();
-    	
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.about, container, false);
     }

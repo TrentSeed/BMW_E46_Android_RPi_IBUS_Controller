@@ -1,9 +1,12 @@
 """
-The interfaces.canbus module contains a BaseInterface implementation for CanBusInterface.
+This module contains the implementation for CanBusInterface.
+
+TODO: complete implementation
 """
 import logging
 import threading
 import serial
+
 
 from interfaces.base import BaseInterface
 

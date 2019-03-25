@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class ActivityMain extends Activity {
 
-	/* track parent page id of first column of options (i.e. Driver Window, Psgnr Window, et */
+	/* track parent page id of first column of options (i.e. Driver Window, Locks, etc.) */
 	public static int parent_page_id;
 	
     @Override
@@ -20,18 +20,22 @@ public class ActivityMain extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         
         // disable action bar for swipe dismissal support
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
         setContentView(R.layout.activity_main);
         
         // inflate the 'rectangle' or 'round' view depending on device screen
-        final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        final WatchViewStub stub = findViewById(R.id.watch_view_stub);
 		stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
 			@Override
 			public void onLayoutInflated(WatchViewStub stub) {
-				
 				// set adapter for 2D Picker pattern
-				final GridViewPager pager = (GridViewPager) findViewById(R.id.pager);
-		        pager.setAdapter(new IBUSGridPagerAdapter(ActivityMain.this, getFragmentManager()));
+				final GridViewPager pager = findViewById(R.id.pager);
+		        pager.setAdapter(
+                    new IBUSGridPagerAdapter(ActivityMain.this, getFragmentManager())
+                );
 			}
 		});
     }
@@ -39,7 +43,7 @@ public class ActivityMain extends Activity {
     /**
      * Display toast message for Toast.LENGTH_SHORT period. Uses the fragments
      * activity for context.
-     * @param message
+     * @param message content to display in toast message
      */
     public void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

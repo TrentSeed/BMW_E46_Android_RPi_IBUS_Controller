@@ -1,11 +1,12 @@
 """
-The interfaces.ibus module contains a BaseInterface implementation for IBUSInterface.
+This module contains the implementation for IBUSInterface.
 """
 import logging
 import time
 import threading
 import serial
 import binascii
+
 
 from interfaces.base import BaseInterface
 
@@ -46,7 +47,13 @@ class IBUSInterface(BaseInterface):
         # initialize serial port connection
         try:
             self.state = self.__states__.STATE_CONNECTING
-            self.handle = serial.Serial(self.port, self.baudrate, parity=self.parity, timeout=self.timeout, stopbits=1)
+            self.handle = serial.Serial(
+                port=self.port,
+                baudrate=self.baudrate,
+                parity=self.parity,
+                timeout=self.timeout,
+                stopbits=1
+            )
             self.state = self.__states__.STATE_CONNECTED
         except serial.serialutil.SerialException:
             LOGGER.exception('failed to establish serial connection')
@@ -91,7 +98,7 @@ class IBUSInterface(BaseInterface):
                 the bytes retrieved from the bus, encoded as a basestring
 
         """
-        LOGGER.info('bus dump: hex: %r', data.encode('hex'))
+        LOGGER.info('bus dump: hex: %r', data.hex())
 
         packets = []
         bus_dump = bytearray(data)
@@ -103,7 +110,7 @@ class IBUSInterface(BaseInterface):
             Returns
             -------
                 bool
-                    True if the packet bytearray is a "full/complete" IBUS packet, False if not
+                    True if the packet bytearray is a "full/complete" IBUS packet
 
             """
             if len(packet) == 0:  # no source id
@@ -157,7 +164,7 @@ class IBUSInterface(BaseInterface):
             self.reconnect()
             return
 
-        self.handle.write(data)
+        self.handle.write(bytes.fromhex(data))
 
 
 class IBUSPacket(dict):
@@ -295,7 +302,6 @@ class IBUSPacket(dict):
 
         """
         checksum = 0
-        LOGGER.info('raw is: %r', type(self['raw']))
 
         for key in self['raw'][:-1]:
             checksum = checksum ^ key

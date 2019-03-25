@@ -1,6 +1,5 @@
 package com.trentseed.bmw_rpi_ibus_controller;
 
-import java.util.Locale;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -18,20 +17,23 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSPacket;
+
 /**
  * Activity that handles presents core functionality to user.
  * @author Trent
  */
 public class ActivityMain extends Activity {
-	
-	// layout objects
-	private ImageView ivBmwEmblem;
-	private TextView tvBtnRadio;
-	private TextView tvBtnWindows;
-	private TextView tvBtnIBUS;
-	private TextView tvBtnMedia;
-	private TextView tvBtnLocation;
-    private ProgressBar pbConnecting;
+
+	ImageView ivBmwEmblem;
+	TextView tvBtnRadio;
+	TextView tvBtnWindows;
+	TextView tvBtnIBUS;
+	TextView tvBtnMedia;
+	TextView tvBtnLocation;
+    ProgressBar pbConnecting;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +45,21 @@ public class ActivityMain extends Activity {
 		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
-		ivBmwEmblem = (ImageView) findViewById(R.id.ivBMWEmblem);
-		tvBtnRadio = (TextView) findViewById(R.id.tvBtnRadio);
-		tvBtnWindows = (TextView) findViewById(R.id.tvBtnWindows);
-		tvBtnIBUS = (TextView) findViewById(R.id.tvBtnIBUS);
-		tvBtnMedia = (TextView) findViewById(R.id.tvBtnMedia);
-		tvBtnLocation = (TextView) findViewById(R.id.tvBtnLocation);
-        pbConnecting = (ProgressBar) findViewById(R.id.pbBluetoothConnecting);
+		ivBmwEmblem = findViewById(R.id.ivBMWEmblem);
+		tvBtnRadio = findViewById(R.id.tvBtnRadio);
+		tvBtnWindows = findViewById(R.id.tvBtnWindows);
+		tvBtnIBUS = findViewById(R.id.tvBtnIBUS);
+		tvBtnMedia = findViewById(R.id.tvBtnMedia);
+		tvBtnLocation = findViewById(R.id.tvBtnLocation);
+        pbConnecting = findViewById(R.id.pbBluetoothConnecting);
 		
 		// bind click handlers to layout objects
 		ivBmwEmblem.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				// launch Screen Off (third-party app used to turn off the screen)
-//				Intent screenOff = getPackageManager().getLaunchIntentForPackage("com.cillinsoft.scrnoff");
-//				if(screenOff != null) startActivity(screenOff);
-
-                if(!BluetoothInterface.isConnected() && !BluetoothInterface.isConnecting) new PerformBackgroundConnect().execute();
-
+                if(!BluetoothInterface.isConnected() && !BluetoothInterface.isConnecting){
+                    new PerformBackgroundConnect().execute();
+                }
 			}
 		});
 		tvBtnLocation.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +68,7 @@ public class ActivityMain extends Activity {
 				// launch Google Maps (using street and city provided by BMW GPS System)
 				String uri = "http://maps.google.co.in/maps?q=" + IBUSWrapper.gpsStreet + ", " + IBUSWrapper.gpsCity;
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-				if(intent != null) ActivityMain.this.startActivity(intent);
+				ActivityMain.this.startActivity(intent);  // TODO what if not found
 			}
 		});
 		tvBtnRadio.setOnClickListener(new View.OnClickListener() {

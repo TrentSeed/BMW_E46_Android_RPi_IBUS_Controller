@@ -10,12 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
-import javax.crypto.IllegalBlockSizeException;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
 
 /**
  * https://developer.android.com/training/wearables/apps/voice.html
@@ -32,7 +30,7 @@ public class FragmentVoiceCommand extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.voice, container, false);
-        imgVoiceCommand = (ImageView) rootView.findViewById(R.id.imgBtnExit);
+        imgVoiceCommand = rootView.findViewById(R.id.imgBtnExit);
         imgVoiceCommand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

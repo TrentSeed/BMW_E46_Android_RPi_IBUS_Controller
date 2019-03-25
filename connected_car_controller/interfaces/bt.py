@@ -1,11 +1,19 @@
 """
-The interfaces.bt module contains a BaseInterface implementation for BluetoothInterface.
+This module contains the implementation for BluetoothInterface.
 """
 import json
 import threading
 import subprocess
 import logging
-from bluetooth import advertise_service, BluetoothSocket, RFCOMM, PORT_ANY, SERIAL_PORT_CLASS, SERIAL_PORT_PROFILE
+
+
+from bluetooth import advertise_service
+from bluetooth import BluetoothSocket
+from bluetooth import RFCOMM
+from bluetooth import PORT_ANY
+from bluetooth import SERIAL_PORT_CLASS
+from bluetooth import SERIAL_PORT_PROFILE
+
 
 from interfaces.base import BaseInterface
 
@@ -56,11 +64,19 @@ class BluetoothInterface(BaseInterface):
         self.rfcomm_channel = self.server_sock.getsockname()[1]
 
         # start listening for incoming connections
-        advertise_service(self.server_sock, self.service_name,
-                          service_id=self.service_uuid,
-                          service_classes=[self.service_uuid, SERIAL_PORT_CLASS],
-                          profiles=[SERIAL_PORT_PROFILE])
-        LOGGER.info('waiting for connection on RFCOMM channel %d' % self.rfcomm_channel)
+        try:
+            advertise_service(
+                sock=self.server_sock,
+                name=self.service_name,
+                service_id=self.service_uuid,
+                service_classes=[self.service_uuid, SERIAL_PORT_CLASS],
+                profiles=[SERIAL_PORT_PROFILE]
+            )
+        except:
+            LOGGER.exception("[ERROR] failed to advertise service")
+            return
+
+        LOGGER.info('waiting for connection on RFCOMM channel %d', self.rfcomm_channel)
 
         # accept received connection
         self.client_sock, self.client_info = self.server_sock.accept()
@@ -110,12 +126,12 @@ class BluetoothInterface(BaseInterface):
 
         """
         try:
-            packet = json.loads(data)
+            packet = json.loads(data.decode('utf-8'))
             LOGGER.info('received packet via bluetooth: %r', packet['data'])
 
             # invoke bound method (if set)
             if self.receive_hook and hasattr(self.receive_hook, '__call__'):
-                self.receive_hook(packet['data'].decode('hex'))
+                self.receive_hook(packet['data'])
 
         except Exception as exception:
             LOGGER.exception('error: %r', exception)
@@ -144,9 +160,9 @@ class BluetoothInterface(BaseInterface):
             data = {"data": json.dumps(packets)}  # TODO : is an inner json.dumps necessary?
             LOGGER.info(data)
             self.client_sock.send(json.dumps(data))
-        except Exception as exception:
+        except Exception:
             # socket was closed, graceful restart
-            LOGGER.exception('bt send: %r', exception.message)
+            LOGGER.exception('bluetooth send exception')
             self.reconnect()
 
     def consume_bus(self):

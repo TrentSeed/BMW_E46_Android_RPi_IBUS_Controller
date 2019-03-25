@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
+
 public class FragmentDriverSeatForward extends Fragment {
 
     ImageView imgBtnUp;
@@ -17,7 +19,7 @@ public class FragmentDriverSeatForward extends Fragment {
         // Inflate the layout for this fragment
         ActivityMain.parent_page_id = IBUSGridPagerAdapter.PAGE_DRIVER_SEAT_FORWARD;
         View rootView = inflater.inflate(R.layout.window_action_up, container, false);
-        imgBtnUp = (ImageView) rootView.findViewById(R.id.btn_up);
+        imgBtnUp = rootView.findViewById(R.id.btn_up);
         imgBtnUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

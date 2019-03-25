@@ -1,6 +1,5 @@
 """
-The pavement.py module defines the various Paver tasks. Tasks include unit_tests,
-lettuce_tests, pylint, etc.
+The pavement.py module defines various Paver tasks. Tasks include unit_tests, pylint, etc.
 
 Usage
 -----
@@ -12,33 +11,14 @@ Usage
     ...
 
     # execute a particular task of the pipeline (method name)
-    $ paver run_pylint
-    ---> pavement.run_pylint
+    $ paver pylint
+    ---> pavement.pylint
     pylint -f parseable controllers interfaces | tee pylint.out
     ...
 
 """
 from paver.tasks import BuildFailure, needs, task
-from paver.setuputils import setup, find_packages
 from paver.easy import sh
-
-
-setup(
-    name='ConnectedCarController',
-    version='1.0.0',
-    packages=find_packages(),
-    license=open('LICENSE.txt').read(),
-    long_description=open('README.txt').read(),
-    author='Trent Seed',
-    author_email='tmseed@gmail.com'
-)
-
-
-@needs(['distutils.command.sdist'])
-@task
-def sdist():
-    """Creates a deployment artifact in dist/*."""
-    pass
 
 
 @task
@@ -54,13 +34,7 @@ def unit_tests():
 
 
 @task
-def lettuce_tests():
-    """Invoke lettuce running for all test/bdd/* feature tests."""
-    sh('lettuce test/bdd')
-
-
-@task
-def run_pylint():
+def pylint():
     """Invoke pylint on remote_code_block and libs packages."""
     try:
         sh('pylint -f parseable --rcfile .pylintrc \
@@ -69,7 +43,7 @@ def run_pylint():
         pass  # pylint errors should NOT fail the build
 
 
-@needs('unit_tests', 'lettuce_tests', 'run_pylint', 'sdist')
+@needs('unit_tests', 'pylint')
 @task
 def default():
     """The default task executed if `paver` is invoked with 0 arguments.
@@ -84,4 +58,3 @@ def default():
         - a deployment artifact is created
 
     """
-    pass

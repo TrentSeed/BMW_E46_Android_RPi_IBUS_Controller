@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
+
 public class FragmentVolumeDown extends Fragment {
 
     ImageView imgBtnDown;
@@ -17,7 +19,7 @@ public class FragmentVolumeDown extends Fragment {
         // Inflate the layout for this fragment
     	ActivityMain.parent_page_id = IBUSGridPagerAdapter.PAGE_VOLUME_DOWN;
         View rootView = inflater.inflate(R.layout.window_action_down, container, false);
-        imgBtnDown = (ImageView) rootView.findViewById(R.id.btn_down);
+        imgBtnDown = rootView.findViewById(R.id.btn_down);
         imgBtnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -16,16 +16,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSPacket;
+
 /**
  * Adapter that is used to display IBUS activity
  * @author Trent Seed
  */
 public class AdapterIBUS extends BaseAdapter{
 	
-	//instance variables
-	public ActivityIBUS thisActivity;
+    private ActivityIBUS thisActivity;
 	
-	public AdapterIBUS(ActivityIBUS thisActivity){
+	AdapterIBUS(ActivityIBUS thisActivity){
 		//store context and determine enroll status
 		this.thisActivity = thisActivity;
 	}
@@ -60,7 +62,7 @@ public class AdapterIBUS extends BaseAdapter{
 		// create field view
 		LinearLayout viewContainer = new LinearLayout(thisActivity);
 		viewContainer.setOrientation(LinearLayout.HORIZONTAL);
-		viewContainer.setGravity(Gravity.LEFT);
+		viewContainer.setGravity(Gravity.START);
 		viewContainer.setPadding(40, 20, 20, 0);
 		
 		// packet image view
@@ -110,7 +112,7 @@ public class AdapterIBUS extends BaseAdapter{
 	 * @return String representing date in specified format
 	 */
 	@SuppressLint("SimpleDateFormat")
-	public static String getDate(long milliSeconds, String dateFormat)
+	private static String getDate(long milliSeconds, String dateFormat)
 	{
 	    // Create a DateFormatter object for displaying date in specified format.
 	    SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);

@@ -1,6 +1,6 @@
 # connected-car-controller #
 
-IBUS interface for my E46 BMW written in Python. This is to be used with the IBUS USB interface which can be acquired from Reslers.de, or from Amazon/eBay.w There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!
+IBUS interface for my E46 BMW written in Python. This is to be used with the IBUS USB interface which can be acquired from Reslers.de, or from Amazon/eBay. There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!
 
 ### How do I get set up? ###
 
@@ -11,4 +11,4 @@ IBUS interface for my E46 BMW written in Python. This is to be used with the IBU
 
 ### Who do I talk to? ###
 
-* Trent Seed - tmseed@gmail.com
+* Trent Seed - hi@trentseed.com

@@ -17,14 +17,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+import com.trentseed.bmw_rpi_ibus_controller.common.IBUSPacket;
+
 public class ActivityIBUS extends Activity {
 
 	// layout objects
-	private ImageView ivBack;
-	private ImageView ivBusActivity;
-	private ListView lvBusEvents;
-	public TextView tvNoActivity;
-	public AdapterIBUS adapter;
+	ImageView ivBack;
+	ImageView ivBusActivity;
+	ListView lvBusEvents;
+	TextView tvNoActivity;
+	AdapterIBUS adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +39,11 @@ public class ActivityIBUS extends Activity {
 		BluetoothInterface.mActivity = this;
 		
 		// get layout objects
-		ivBack = (ImageView) findViewById(R.id.ivBack);
-		ivBusActivity = (ImageView) findViewById(R.id.ivBusActivity);
+		ivBack = findViewById(R.id.ivBack);
+		ivBusActivity = findViewById(R.id.ivBusActivity);
 		ivBusActivity.setVisibility(View.GONE);
-		lvBusEvents = (ListView) findViewById(R.id.lvBusEvents);
-		tvNoActivity = (TextView) findViewById(R.id.tvNoActivity);
+		lvBusEvents = findViewById(R.id.lvBusEvents);
+		tvNoActivity = findViewById(R.id.tvNoActivity);
 		
 		// set click handlers
 		ivBack.setOnClickListener(new View.OnClickListener() {

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+
 public class FragmentWelcome extends Fragment {
 
 	ImageView imgBtnReconnect;
@@ -20,8 +22,8 @@ public class FragmentWelcome extends Fragment {
 
         // Inflate the layout for this fragment
 		View rootView = inflater.inflate(R.layout.welcome, container, false);
-        pbConnectionLoader = (ProgressBar) rootView.findViewById(R.id.pbConnectionLoader);
-        imgBtnReconnect = (ImageView) rootView.findViewById(R.id.imgBtnEmblem);
+        pbConnectionLoader = rootView.findViewById(R.id.pbConnectionLoader);
+        imgBtnReconnect = rootView.findViewById(R.id.imgBtnEmblem);
         imgBtnReconnect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

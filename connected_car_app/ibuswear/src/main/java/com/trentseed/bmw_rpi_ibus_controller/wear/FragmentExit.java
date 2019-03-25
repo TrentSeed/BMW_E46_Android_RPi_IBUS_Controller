@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
+
 public class FragmentExit extends Fragment {
 
     ImageView imgBtnClose;
@@ -17,7 +19,7 @@ public class FragmentExit extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.exit, container, false);
-        imgBtnClose = (ImageView) rootView.findViewById(R.id.imgBtnExit);
+        imgBtnClose = rootView.findViewById(R.id.imgBtnExit);
         imgBtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
