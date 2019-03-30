@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
 import com.trentseed.bmw_rpi_ibus_controller.common.IBUSWrapper;
 
-public class ActivityWindows extends Activity {
+public class ActivityDevices extends Activity {
 	
 	ImageView ivBack;
 	Button btnDriverFrontUp;
@@ -29,7 +29,7 @@ public class ActivityWindows extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		onNewIntent(getIntent());
-		setContentView(R.layout.activity_windows);
+		setContentView(R.layout.activity_devices);
 		BluetoothInterface.mActivity = this;
 		
 		// get layout objects

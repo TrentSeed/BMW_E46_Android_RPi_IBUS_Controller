@@ -3,8 +3,8 @@
     android:id="@+id/rlBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tablet_bg"
-    tools:context=".ActivityMain" >
+    android:background="@drawable/background"
+    tools:context=".ActivityMain">
 
     <TextView
         android:id="@+id/tvNoActivity"
@@ -22,11 +22,11 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp" >
+            android:layout_height="100dp">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -52,8 +52,8 @@
                 android:id="@+id/ivBusActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="false"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:paddingLeft="20dp"
@@ -67,15 +67,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp" >
+            android:paddingRight="20dp">
 
             <ListView
                 android:id="@+id/lvBusEvents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" >
-            </ListView>
+                android:layout_centerHorizontal="true"></ListView>
 
         </RelativeLayout>
 

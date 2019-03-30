@@ -1,65 +1,87 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tablet_bg"
+    android:background="@drawable/background"
     tools:context=".ActivityMain">
+
+    <ImageView
+        android:id="@+id/ivBtnMic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="Mic"
+        android:paddingLeft="30dp"
+        android:paddingBottom="30dp"
+        android:src="@drawable/voice" />
+
+    <ImageView
+        android:id="@+id/ivBtnGear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="right"
+        android:layout_weight="0"
+        android:contentDescription="Gear"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp"
+        android:src="@drawable/gear" />
 
     <LinearLayout
         android:id="@+id/llHorizontalWrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
+            android:id="@+id/llColumn1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingBottom="30dp">
+            android:paddingBottom="50dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2"
+                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tvBtnRadio"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/ivBtnRadio"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="Radio"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="45sp" />
-
+                    android:layout_marginTop="50sp"
+                    android:contentDescription="Radio"
+                    android:src="@drawable/radio" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2"
+                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tvBtnIBUS"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/ivBtnMedia"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="IBUS"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="45sp" />
+                    android:layout_marginBottom="50sp"
+                    android:contentDescription="Media"
+                    android:src="@drawable/media" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
+            android:id="@+id/llColumn2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -68,33 +90,25 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:padding="20dp">
+                android:gravity="center"
+                android:padding="10dp">
 
-                <RelativeLayout
+                <ImageView
+                    android:id="@+id/ivBMWEmblem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="BMW"
+                    android:src="@drawable/bmw_emblem_selector" />
+
+                <ProgressBar
+                    android:id="@+id/pbBluetoothConnecting"
+                    style="?android:attr/progressBarStyleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="false"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true">
-
-                    <ImageView
-                        android:id="@+id/ivBMWEmblem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:src="@drawable/bmw_emblem_selector" />
-
-                    <ProgressBar
-                        android:id="@+id/pbBluetoothConnecting"
-                        style="?android:attr/progressBarStyleLarge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true" />
-                </RelativeLayout>
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 
@@ -104,62 +118,56 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/tvBtnLocation"
+                    android:id="@+id/tvDateTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
-                    android:paddingTop="40dp"
-                    android:text="DISTEL DR\nLOS ALTOS, CA"
+                    android:text="00/00/00\n12:00 AM"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="30sp" />
+                    android:textSize="40sp" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
+            android:id="@+id/llColumn3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingBottom="30dp">
+            android:paddingBottom="50dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2"
+                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tvBtnMedia"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/ivBtnDevices"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="Media"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="45sp" />
-
+                    android:layout_marginTop="50sp"
+                    android:contentDescription="Devices"
+                    android:src="@drawable/devices" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2"
+                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/tvBtnWindows"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/ivBtnMaps"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_weight="1"
-                    android:text="Windows"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="45sp" />
-
+                    android:layout_marginBottom="50sp"
+                    android:contentDescription="Maps"
+                    android:src="@drawable/maps" />
             </RelativeLayout>
 
         </LinearLayout>

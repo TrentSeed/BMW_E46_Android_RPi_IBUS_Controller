@@ -39,11 +39,16 @@ class IBUSInterface(BaseInterface):
         self.thread = None
 
     def connect(self):
-        """Connect to the vehicle via serial communication."""
-        if not self.state == self.__states__.STATE_READY:
-            LOGGER.error('error: interface is not STATE_READY')
-            raise Exception('invalid interface state: %r', self.state)
+        """Create daemon thread to establish serial communication."""
+        LOGGER.info('creating thread for %s interface...', self.__interface_name__)
+        self.thread = threading.Thread(target=self.listen_for_serial_connection)
+        self.thread.daemon = True
+        self.thread.start()
 
+    def listen_for_serial_connection(self):
+        """
+        Connect to the vehicle via serial communication.
+        """
         # initialize serial port connection
         try:
             self.state = self.__states__.STATE_CONNECTING
@@ -56,23 +61,27 @@ class IBUSInterface(BaseInterface):
             )
             self.state = self.__states__.STATE_CONNECTED
         except serial.serialutil.SerialException:
-            LOGGER.exception('failed to establish serial connection')
-            return False
+            LOGGER.exception('failed to establish serial connection, retrying in 10 seconds...')
+            time.sleep(10)
+            self.state = self.__states__.STATE_READY
+            self.listen_for_serial_connection()
 
-        # launch new thread for continuous processing of the bus
-        LOGGER.info('creating thread for %s interface...', self.__interface_name__)
-        self.thread = threading.Thread(target=self.consume_bus)
-        self.thread.daemon = True
-        self.thread.start()
+        # start listening for data
+        self.consume_bus()
 
     def consume_bus(self):
         """Starts an infinite loop on the thread that will continue to read from the bus."""
         read_buffer_length = self.get_setting('read_buffer_length', int)
 
-        while self.handle:
-            data = self.handle.read(read_buffer_length)
-            if len(data) > 0:
-                self.receive(data)
+        try:
+            while self.handle:
+                data = self.handle.read(read_buffer_length)
+                if len(data) > 0:
+                    self.receive(data)
+        except Exception:
+            LOGGER.exception('exception consuming bus, retrying connection in 5 seconds...')
+            time.sleep(5)
+            self.reconnect()
 
     def disconnect(self):
         """Closes serial connection and resets the handle."""

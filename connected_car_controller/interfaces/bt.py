@@ -109,8 +109,8 @@ class BluetoothInterface(BaseInterface):
         """Resets the bluetooth hci0 device via hciconfig command line interface."""
         try:
             LOGGER.info('performing hci0 down/up...')
-            subprocess.Popen('sudo hciconfig hci0 down', shell=True).communicate()
-            subprocess.Popen('sudo hciconfig hci0 up', shell=True).communicate()
+            subprocess.Popen('hciconfig hci0 down', shell=True).communicate()
+            subprocess.Popen('hciconfig hci0 up', shell=True).communicate()
             LOGGER.info('hci0 down/up has completed')
         except Exception as exception:
             LOGGER.exception("Failed to restart hci0 - %r", exception)

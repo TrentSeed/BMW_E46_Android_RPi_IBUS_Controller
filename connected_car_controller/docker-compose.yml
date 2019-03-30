@@ -9,6 +9,7 @@ services:
     build:
       context: .
     volumes:
-      - ./:/opt/car-controller
+      - "./:/opt/car-controller"
+      - "/var/run/sdp:/var/run/sdp"
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"

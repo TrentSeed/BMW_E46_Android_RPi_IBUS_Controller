@@ -36,7 +36,7 @@
             android:theme="@android:style/Theme.Wallpaper"/>
         <activity android:name=".ActivityStatus" android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Wallpaper"/>
-        <activity android:name=".ActivityWindows" android:screenOrientation="landscape"
+        <activity android:name=".ActivityDevices" android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Wallpaper"/>
     </application>
 

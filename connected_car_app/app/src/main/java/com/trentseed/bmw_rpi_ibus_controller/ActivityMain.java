@@ -14,7 +14,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trentseed.bmw_rpi_ibus_controller.common.BluetoothInterface;
@@ -28,11 +27,12 @@ import com.trentseed.bmw_rpi_ibus_controller.common.IBUSPacket;
 public class ActivityMain extends Activity {
 
 	ImageView ivBmwEmblem;
-	TextView tvBtnRadio;
-	TextView tvBtnWindows;
-	TextView tvBtnIBUS;
-	TextView tvBtnMedia;
-	TextView tvBtnLocation;
+	ImageView ivBtnRadio;
+	ImageView ivBtnDevices;
+	ImageView ivBtnMaps;
+	ImageView ivBtnMedia;
+	ImageView ivBtnGear;
+	ImageView ivBtnVoice;
     ProgressBar pbConnecting;
 	
 	@Override
@@ -46,11 +46,12 @@ public class ActivityMain extends Activity {
 		
 		// get layout objects
 		ivBmwEmblem = findViewById(R.id.ivBMWEmblem);
-		tvBtnRadio = findViewById(R.id.tvBtnRadio);
-		tvBtnWindows = findViewById(R.id.tvBtnWindows);
-		tvBtnIBUS = findViewById(R.id.tvBtnIBUS);
-		tvBtnMedia = findViewById(R.id.tvBtnMedia);
-		tvBtnLocation = findViewById(R.id.tvBtnLocation);
+		ivBtnRadio = findViewById(R.id.ivBtnRadio);
+		ivBtnDevices = findViewById(R.id.ivBtnDevices);
+		ivBtnMaps = findViewById(R.id.ivBtnMaps);
+		ivBtnMedia = findViewById(R.id.ivBtnMedia);
+		ivBtnVoice = findViewById(R.id.ivBtnMic);
+        ivBtnGear = findViewById(R.id.ivBtnGear);
         pbConnecting = findViewById(R.id.pbBluetoothConnecting);
 		
 		// bind click handlers to layout objects
@@ -62,30 +63,30 @@ public class ActivityMain extends Activity {
                 }
 			}
 		});
-		tvBtnLocation.setOnClickListener(new View.OnClickListener() {
+		ivBtnMaps.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// launch Google Maps (using street and city provided by BMW GPS System)
-				String uri = "http://maps.google.co.in/maps?q=" + IBUSWrapper.gpsStreet + ", " + IBUSWrapper.gpsCity;
+				String uri = "http://maps.google.com/maps";
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-				ActivityMain.this.startActivity(intent);  // TODO what if not found
+				ActivityMain.this.startActivity(intent);
 			}
 		});
-		tvBtnRadio.setOnClickListener(new View.OnClickListener() {
+		ivBtnRadio.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent launchRadio = new Intent(ActivityMain.this, ActivityRadio.class);
 				startActivity(launchRadio);
 			}
 		});
-		tvBtnWindows.setOnClickListener(new View.OnClickListener() {
+		ivBtnDevices.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent launchWindows = new Intent(ActivityMain.this, ActivityWindows.class);
+				Intent launchWindows = new Intent(ActivityMain.this, ActivityDevices.class);
 				startActivity(launchWindows);				
 			}
 		});
-		tvBtnMedia.setOnClickListener(new View.OnClickListener() {
+		ivBtnMedia.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder chooseMediaSource = new AlertDialog.Builder(ActivityMain.this);
@@ -109,13 +110,22 @@ public class ActivityMain extends Activity {
 				chooseMediaSource.create().show();
 			}
 		});
-		tvBtnIBUS.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent launchIBUS = new Intent(ActivityMain.this, ActivityIBUS.class);
-				startActivity(launchIBUS);				
-			}
-		});
+        ivBtnVoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+                Intent launchWindows = new Intent(ActivityMain.this, ActivityIBUS.class);
+                startActivity(launchWindows);
+            }
+        });
+        ivBtnGear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO
+                Intent launchWindows = new Intent(ActivityMain.this, ActivityIBUS.class);
+                startActivity(launchWindows);
+            }
+        });
 	
 		// check if bluetooth enabled (prompt to enable)
         refreshConnectingStatus();
@@ -123,9 +133,6 @@ public class ActivityMain extends Activity {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    startActivityForResult(enableBtIntent, 100);
 		}
-		
-		// reset navigation on screen location
-		updateLocationOnScreen();
 	}
 	
 	@Override
@@ -190,7 +197,7 @@ public class ActivityMain extends Activity {
 	 * Updates the UI with latest location information provided by GPS
 	 */
 	public void updateLocationOnScreen(){
-		tvBtnLocation.setText(IBUSWrapper.gpsStreet + "\n" + IBUSWrapper.gpsCity);
+//		tvBtnLocation.setText(IBUSWrapper.gpsStreet + "\n" + IBUSWrapper.gpsCity);
 	}
 	
 	/**
@@ -207,7 +214,7 @@ public class ActivityMain extends Activity {
 				IBUSWrapper.gpsStreet = ibPacket.getAsciiFromRaw();
 				IBUSWrapper.gpsIsCityToggle = true;
 			}
-			updateLocationOnScreen();
+//			updateLocationOnScreen();
 		}
 	}
 }

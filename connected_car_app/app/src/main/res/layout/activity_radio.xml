@@ -3,8 +3,8 @@
     android:id="@+id/rlBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tablet_bg"
-    tools:context=".ActivityMain" >
+    android:background="@drawable/background"
+    tools:context=".ActivityMain">
 
     <TextView
         android:id="@+id/tvNoActivity"
@@ -22,11 +22,11 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp" >
+            android:layout_height="100dp">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -52,15 +52,15 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:gravity="center_horizontal" >
+                android:layout_alignParentBottom="true"
+                android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/btnSunroofOpen"
@@ -93,7 +93,7 @@
                 android:layout_above="@+id/linearLayout1"
                 android:layout_alignParentLeft="true"
                 android:layout_marginBottom="16dp"
-                android:gravity="center_horizontal" >
+                android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/btnAccept"
