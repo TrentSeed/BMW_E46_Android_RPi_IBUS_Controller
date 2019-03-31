@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlBackground"
     android:layout_width="match_parent"
@@ -16,7 +17,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="80dp">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -43,129 +44,17 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="30dp">
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDevices"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:text="Driver"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <Button
-                        android:id="@+id/btnDriverFrontUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Up" />
-
-                    <Button
-                        android:id="@+id/btnDriverFrontDown"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Down" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/TextView01"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:text="(Rear)"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <Button
-                        android:id="@+id/btnDriverRearUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Up" />
-
-                    <Button
-                        android:id="@+id/btnDriverRearDown"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Down" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/TextView02"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:text="Passenger"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <Button
-                        android:id="@+id/btnPassengerFrontUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Up" />
-
-                    <Button
-                        android:id="@+id/btnPassengerFrontDown"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Down" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/TextView03"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:text="(Rear)"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <Button
-                        android:id="@+id/btnPassengerRearUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Up" />
-
-                    <Button
-                        android:id="@+id/btnPassengerRearDown"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:text="Down" />
-                </LinearLayout>
-
-            </LinearLayout>
-
+                android:orientation="horizontal"
+                app:reverseLayout="false" />
         </RelativeLayout>
 
     </LinearLayout>

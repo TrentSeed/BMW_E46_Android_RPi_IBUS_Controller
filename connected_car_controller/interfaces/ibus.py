@@ -315,5 +315,4 @@ class IBUSPacket(dict):
         for key in self['raw'][:-1]:
             checksum = checksum ^ key
 
-        LOGGER.info('checksum is: %r', checksum)
         return chr(checksum)

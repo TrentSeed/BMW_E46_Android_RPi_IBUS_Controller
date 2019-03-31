@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "com.trentseed.bmw_rpi_ibus_controller"
@@ -21,4 +21,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     wearApp project(':ibuswear')
     implementation project(':common')
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

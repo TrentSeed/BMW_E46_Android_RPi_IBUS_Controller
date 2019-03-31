@@ -17,34 +17,37 @@ class ConnectedThread extends Thread {
      * Bluetooth input stream, and invoking IBUSWrapper.processPacket().
      */
     public void run() {
-        int bytes;
 
+        // start a loop that reads from the bluetooth input stream
         while (true) {
             try {
+                // read bytes from bluetooth input stream
                 byte[] buffer = new byte[2048];  // TODO: from config
-                bytes = BluetoothInterface.mBluetoothInputStream.read(buffer);
-
-                if(bytes > 0){
-                    // read data, inflate to BlueBusPacket, extract IBUSPacket
-                    Log.d("BMW", "Data In = " + new String(buffer).trim());
-                    String strBuffer = new String(buffer).trim();
-
-                    if(isJSONValid(strBuffer)){
-                        BlueBusPacket bbPacket = new Gson().fromJson(strBuffer, BlueBusPacket.class);
-
-                        for(final IBUSPacket ibPacket : bbPacket.getIBUSPackets()){
-                            //perform command
-                            BluetoothInterface.mActivity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    IBUSWrapper.processPacket(ibPacket);
-                                }
-                            });
-                        }
-                    }
+                int bytes = BluetoothInterface.mBluetoothInputStream.read(buffer);
+                if(bytes == 0) {
+                    continue;
                 }
+
+                // create String from data and validate JSON structure
+                Log.d("BMW", "Data In = " + new String(buffer).trim());
+                String strBuffer = new String(buffer).trim();
+                if(!isJSONValid(strBuffer)) {
+                    continue;
+                }
+
+                // parse received data
+                ControllerMessage msg = new Gson().fromJson(strBuffer, ControllerMessage.class);
+                for(final IBUSPacket ibPacket : msg.getIBUSPackets()){
+                    BluetoothInterface.mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            IBUSWrapper.processPacket(ibPacket);
+                        }
+                    });
+                }
+
             } catch (IOException e) {
-                Log.d("BMW", "Error reading: " + String.valueOf(e.getLocalizedMessage()));
+                Log.d("BMW", "Error reading: " + String.valueOf(e.getMessage()));
                 break;
             }
         }
