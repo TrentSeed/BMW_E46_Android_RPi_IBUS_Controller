@@ -16,7 +16,7 @@ There are three main components of the solution:
 ![Android_RPi_IBUS_Overview](https://s3-us-west-1.amazonaws.com/connected-car-static-files/connected_car_overview2.png)
 
 There is also an Android Wear (4.4W) component that allows you to control your vehicle from your smart watch!
-**Android Wear Device** - Secondary device that provides quick interactions with the car
+* Android Wear Device - Secondary device that provides quick interactions with the car
 
 ![Android_WEAR_IBUS_Overview](https://s3-us-west-1.amazonaws.com/connected-car-static-files/IBUS+Wear+UI+On+G+Watch.png)
 
@@ -44,7 +44,7 @@ There is also an Android Wear (4.4W) component that allows you to control your v
 	* `cd controller/connected_car_controller/`
 	* `docker-compose up --build -d`
 
-#### 2b. Running wihout Docker
+#### 2b. Running without Docker
 * Install packages
 	* `apt-get install build-essential bluez bluez-tools libbluetooth-dev`
 * Download project
@@ -55,14 +55,16 @@ There is also an Android Wear (4.4W) component that allows you to control your v
 * Run the project: `python3 start_controller.py bmw-e46`
 
 ### 3. Android Mobile / Tablet
-* Update `BluetoothInterface.remoteBluetoothAddress` of 'connected_car_app/app' with RPi Bluetooth address
-* Update `BluetoothInterface.remoteBluetoothAddress` of 'connected_car_app/ibuswear' with RPi Bluetooth address
+* Update `BluetoothInterface.remoteBluetoothAddress` of 'connected_car_app/common' with RPi Bluetooth address
 * Build Android project `connected_car_app/` via Android Studio
-* Install `connected_car_app/app/build/outputs/apk/debug/app-debug.apk` to mobile/tablet device
-* Install `connected_car_app/ibuswear/build/outputs/apk/debug/ibuswear-debug.apk` to smart watch
+* Install the applicaton
+	* You can build and run in Android Studio by connecting your devices
+	* You can also install by transfering the built APKs 
+		* `connected_car_app/app/build/outputs/apk/debug/app-debug.apk`
+		* `connected_car_app/ibuswear/build/outputs/apk/debug/ibuswear-debug.apk`
 
 ## How To Get Started
 * Install the prerequisites above
 * Ensure Android device is paired with Raspberry Pi via Bluetooth
-* Run as controller as daemon: `docker-compose up -d`
+* Run the controller as daemon: `docker-compose up -d`
 * Launch Connected Car App on your Android device or wearable
