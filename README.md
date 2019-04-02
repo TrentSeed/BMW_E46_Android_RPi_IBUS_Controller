@@ -5,6 +5,7 @@
 Blog Series on Medium:
 - [Connecting a BMW to the Internet: Part One](https://medium.com/design-and-tech-co/connecting-a-bmw-to-the-internet-part-one-fbe18a54121d)
 - [Connecting a BMW to the Internet: Part Two](https://medium.com/@trentseed/connecting-a-bmw-to-the-internet-part-two-1ee2ea44d4a2)
+- [Connecting a BMW to the Internet: Part Three](https://medium.com/@trentseed/connecting-a-bmw-to-the-internet-part-three-89fb322b1dcb)
 
 ## Overview 
 
