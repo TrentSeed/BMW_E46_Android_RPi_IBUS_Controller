@@ -1,5 +1,13 @@
 <p align="center"><img src="https://s3-us-west-1.amazonaws.com/connected-car-static-files/connected_car_logo_padded_blue.png" width="70%" style=""></p>
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)
+![Dependencies](https://img.shields.io/librariesio/github/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller.svg)
+[![GitHub Issues](https://img.shields.io/github/issues/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller.svg)](https://github.com/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller/issues)
+![Last Updated](https://img.shields.io/github/last-commit/TrentSeed/BMW_E46_Android_RPi_IBUS_Controller.svg)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+<br/><br/>
+
 "Appify" your E46 BMW with a Raspberry Pi and your Smartphone! This repository contains the IBUS controller, as well as the Android application which supports smart phones and wearables. This is to be used with the IBUS USB interface which can be acquired from [Reslers.de](http://www.reslers.de/IBUS/), or from Amazon/eBay.
 
 Blog Series on Medium:
